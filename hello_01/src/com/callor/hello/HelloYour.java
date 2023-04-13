@@ -11,7 +11,6 @@ public class HelloYour {
 		System.out.println(30 * 40);
 		System.out.println(30 / 40);
 		System.out.println(30 % 40);
-		
 	}
 
 }
