@@ -11,7 +11,6 @@ public class SystemB {
 		System.out.println();
 		System.out.printf("%d x %d = %d",99,77,77*99);
 		System.out.println();
-		System.out.print("\n");
 		System.out.print("대한민국\n우리나라\nRepublic of korea");
 		
 	}

@@ -17,12 +17,12 @@ public class VarF {
 		System.out.println(minus1);
 		System.out.println(times1);
 		System.out.println(devide1);
-		
+		System.out.println();
 		System.out.println("덧셈:" + plus1);
 		System.out.println("뺄셈:" + minus1);
 		System.out.println("곱셈:" + times1);
 		System.out.println("나눗셈:" + devide1);
-		
+		System.out.println();
 		System.out.printf("%d + %d = %d\n",num1, num2, plus1);
 		System.out.printf("%d - %d = %d\n",num1, num2, minus1);
 		System.out.printf("%d * %d = %d\n",num1, num2, times1);

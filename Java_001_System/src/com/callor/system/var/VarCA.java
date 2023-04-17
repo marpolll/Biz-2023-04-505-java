@@ -30,6 +30,9 @@ public class VarCA {
 		byes = intNum1 % 2 == 0;  // intNum1를 true 나 false 라는 블린(boolean byes) 타입 결과
 		// 답은 각각 0 과 true
 		
+		System.out.println(intYes1);
+		System.out.println(byes);
+		
 	}
 
 }

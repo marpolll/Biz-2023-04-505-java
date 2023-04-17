@@ -9,7 +9,7 @@ public class VarCB {
 		
 		// intNum1 변수에 정수 20을 더하여
 		// 다른 변수에 보관하고자 한다
-		// 이때 결과를 보관할 변수 intResult 를 선언하고
+		// 이때 결과를 보관할 변수 int Result 를 선언하고
 		// 결과를 intResult 에 보관한다
 		int intResult = 0;
 		intResult = intNum1 + 20;
@@ -52,6 +52,7 @@ public class VarCB {
 		// 숫자 <-> boolean 간에는 변환을 할수 없다
 		// intYes1 = intNum1 % 2 == 0;   XXXXXX
 		// bYes = intNum1 % 2;           XXXXXX
+		
 		
 	}
 }
