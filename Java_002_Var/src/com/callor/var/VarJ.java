@@ -1,6 +1,6 @@
 package com.callor.var;
 
-public class VatJ {
+public class VarJ {
 
 	public static void main(String[] args) {
 
