@@ -33,9 +33,9 @@ public class VarA {
 		float floAvg = (float)intTotal /3f; //꼭 뒤에 숫자에 f 넣기
 		
 		System.out.println("=====================");
-		System.out.printf("국어 : %3d\n", intKor);
-		System.out.printf("영어 : %3d\n", intEng);
-		System.out.printf("수학 : %3d\n", intMath);
+		System.out.printf("국어 : %2d\n", intKor);
+		System.out.printf("영어 : %4d\n", intEng);
+		System.out.printf("수학 : %6d\n", intMath);
 		System.out.println("=====================");
 		System.out.printf("총점 : %d 평균 : %5.2f\n", intTotal, floAvg); //뒤에 %d(정수) 를 %f(실수) 로변경 
 		                                 // %5.2f 5번째 자리에서 입력 하고  
