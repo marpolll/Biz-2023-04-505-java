@@ -13,6 +13,7 @@ public class ArrayF {
 				return 0;
 			}
 		}
+		return num;
 	}
 	
 	/*
