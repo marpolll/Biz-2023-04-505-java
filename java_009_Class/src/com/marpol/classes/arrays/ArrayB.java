@@ -10,9 +10,7 @@ public class ArrayB {
 		ScoreDto 이몽룡 = new ScoreDto();
 		ScoreDto 성춘향 = new ScoreDto();
 		ScoreServiceA scoreService = new ScoreServiceA();
-		// 홍길동 학생의 학번, 이름, 과목점수 세팅
-		// 성적표 타이틀 출력
-		// 각 학생의 성적정보 출력
+		
 		System.out.println("========================================================");
 		System.out.println("학번 \t이름 \t국어 \t영어 \t수학 \t총점 \t평균");
 		System.out.println("========================================================");
@@ -42,6 +40,24 @@ public class ArrayB {
 		scoreService.scorePrint(홍길동);
 		scoreService.scorePrint(이몽룡);
 		scoreService.scorePrint(성춘향);
+		
+		System.out.println("=".repeat(60));
+		
+		int korTotal = 홍길동.scKor;
+		korTotal += 이몽룡.scKor;
+		korTotal += 성춘향.scKor;
+
+		int engTotal = 홍길동.scEng;
+		engTotal += 이몽룡.scEng;
+		engTotal += 성춘향.scEng;
+
+		int mathTotal = 홍길동.scMath;
+		mathTotal += 이몽룡.scMath;
+		mathTotal += 성춘향.scMath;
+		
+		scoreService.scoreTotalPrint(korTotal, engTotal, mathTotal);
+
+		System.out.println("=".repeat(60));
 		
 	}
 
