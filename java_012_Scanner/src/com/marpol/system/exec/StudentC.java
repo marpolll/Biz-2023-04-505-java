@@ -6,9 +6,9 @@ public class StudentC {
 	
 	public static void main(String[] args) {
 		
-		StudentServiceV1 student = new StudentServiceV1();
+		StudentServiceV1 stService = new StudentServiceV1();
 		
-		student.inputStudent();
+		stService.inputStudent();
 	}
 
 
