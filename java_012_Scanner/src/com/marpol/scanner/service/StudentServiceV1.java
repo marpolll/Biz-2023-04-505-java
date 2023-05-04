@@ -32,9 +32,10 @@ public class StudentServiceV1 {
 			}
 			break;
 		}
+		
 		System.out.print("전화번호 >>  ");
 		String stTel = scan.nextLine();
-		
+
 		student.setStNum(stNum);
 		student.setStName(stName);
 		student.setStDept(stDept);

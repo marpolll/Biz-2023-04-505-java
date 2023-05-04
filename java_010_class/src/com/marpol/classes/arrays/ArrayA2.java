@@ -5,7 +5,7 @@ public class ArrayA2 {
 	public static void main(String[] args) {
 		int[] nums = new int[5];
 		for (int i = 0; i < nums.length; i++) {
-			nums[i] = (int) (Math.random() * 50) + 51;
+			nums[i] = (int) (Math.random() * 6) + 1;
 
 		}
 		for (int i = 0; i < nums.length; i++) {
