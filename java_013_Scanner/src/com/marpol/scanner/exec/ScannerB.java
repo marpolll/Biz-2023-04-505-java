@@ -26,18 +26,16 @@ public class ScannerB {
 				if (num >= 3) {
 					break;
 				}
-				break;
 			} catch (Exception e) {
 				System.out.println("정수값만 입력해야 합니다.");
 			}
-			scan.close();
 		}
 		return num;
 	}
 
 	
 	// 매개변수를 통하여 전달받은 num 변수의 값이
-	// dl dkslaus -1 을 리턴 프라임 이면 num 변수의 값을 리턴
+	// prime 이 아니면 -1 을 리턴 프라임 이면 num 변수의 값을 리턴
 	public static int prime(int num) {
 		int i = 0;
 

@@ -2,6 +2,7 @@ package com.marpol.scanner.exec;
 
 import java.util.Scanner;
 
+
 import com.marpol.scanner.config.PublicConfig;
 
 public class ScannerFA {

@@ -26,21 +26,21 @@ public class ScannerD {
 
 				try {
 					int intnum = Integer.valueOf(strnum);
+					if (num == intnum) {
+						System.out.println("참 잘했어요");
+						break;
+					}
 					if (num > intnum) {
 						System.out.printf("%d > %d 이므로 더 큰 정수 입력",num,intnum);
 					}
 					else {
 						System.out.printf("%d < %d 이므로 더 작은 정수 입력\n",num,intnum);
 					}
-					if (num == intnum) {
-						System.out.println("참 잘했어요");
-						break;
-					}
+					
 				} catch (Exception e) {
 					System.out.println("정수를 정확히 입력하세요");
 				}
 			}
-			scan.close();
 		}
 	}
 }

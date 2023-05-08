@@ -64,7 +64,10 @@ public class ScannerF {
 //					int _tmp = nums[in];
 //					nums[in] = nums[out];                            // 오름차순
 //					nums[out] = _tmp;
-//					for (int i = 0; i < nums.length; i++) {
+
+		
+		
+//					for (int i = 0; i < nums.length; i++) {            위에for 밖으로 빼자
 //						System.out.printf("%3d\t", nums[i]);
 
 //		for (int i = 0; i < nums.length; i++) {
