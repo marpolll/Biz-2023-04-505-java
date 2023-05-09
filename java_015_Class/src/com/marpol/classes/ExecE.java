@@ -1,34 +1,28 @@
 package com.marpol.classes;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import com.marpol.models.AnimalDto;
-import com.marpol.models.StudentDto;
 
 public class ExecE {
 	
 	public static void main(String[] args) {
-		AnimalDto animalDto = new AnimalDto();
+		AnimalDto animalDto1 = new AnimalDto();
+		AnimalDto animalDto2 = new AnimalDto();
+		AnimalDto animalDto3 = new AnimalDto();
 		
-		animalDto.setAnName("럭키");
-		animalDto.setAnKind("허스키");
-		animalDto.setAnAge(5);
+		List<AnimalDto> animalList = new ArrayList<>();
 		
-		animalDto.setAnName("나비");
-		animalDto.setAnKind("버밀라");
-		animalDto.setAnAge(7);
+		animalDto1 = new AnimalDto ("럭키", "허스키", 5);
+		animalDto2 = new AnimalDto ("나비", "버밀라", 7);
+		animalDto3 = new AnimalDto ("몽", "스피츠", 7);
+		animalList.add(animalDto1);
+		animalList.add(animalDto2);
+		animalList.add(animalDto3);
 		
-		animalDto.setAnName("몽");
-		animalDto.setAnKind("스피츠");
-		animalDto.setAnAge(7);
-		
-//		List<AnimalDto> animalList = new ArrayList<>();
-//		animalList.add(animalList);
-//		stDto = new StudentDto("0002", "이몽룡", "전자", 2, "010-111-1111");
-//		stList.add(stDto);
-//		
-//		System.out.println(stList.toString());
+		System.out.println(animalList.toString());
 		
 	}
 

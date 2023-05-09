@@ -39,8 +39,6 @@ public class AnimalDto {
 	public String toString() {
 		return "AnimalDto [anName=" + anName + ", anKind=" + anKind + ", anAge=" + anAge + "]";
 	}
-
-	
 	
 }
 
