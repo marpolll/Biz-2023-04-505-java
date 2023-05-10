@@ -10,7 +10,7 @@ public class ScoreExecB {
 		ScoreService scService = new ScoreServiceImplV2();
 		scService.loadScore();
 		scService.printScore();
-		
+	   
 	}
 
 }
