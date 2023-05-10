@@ -14,7 +14,7 @@ public class ScoreServiceImplV5 implements StudentService {
 	private List<StudentDto> stdList;
 
 	public ScoreServiceImplV5() {
-		// 기본
+		// 기본 생성자에서 객체를 초기화(사용할수 있도록 생성)
 		stdList = new ArrayList<>();
 	}
 
@@ -50,15 +50,15 @@ public class ScoreServiceImplV5 implements StudentService {
 	public void printStudent() {
 
 		System.out.println("=".repeat(70));
-		System.out.print("학번\t 이름\t 학과\t 학년\t 전화번호\t 주소\n");
+		System.out.print("학번\t 이름\t 학과\t      학년\t 전화번호\t 주소\n");
 		System.out.println("-".repeat(70));
 		for (StudentDto dto : stdList) {
-			System.out.printf("$s\t", dto.stNum);
-			System.out.printf("$s\t", dto.stName);
-			System.out.printf("$s\t", dto.stDept);
-			System.out.printf("$s\t", dto.stGrade);
-			System.out.printf("$s\t", dto.stTel);
-			System.out.printf("$s\n", dto.stAdd);
+			System.out.printf("%s\t", dto.stNum);
+			System.out.printf("%s\t", dto.stName);
+			System.out.printf("%s\t", dto.stDept);
+			System.out.printf("%d\t", dto.stGrade);
+			System.out.printf("%s\t", dto.stTel);
+			System.out.printf("%s\n", dto.stAdd);
 
 			System.out.println();
 
@@ -79,4 +79,14 @@ public class ScoreServiceImplV5 implements StudentService {
 		}
 		return null;
 	}
+	
+	public StudentDto getDept(String stDept) {
+		for (StudentDto dto : stdList) {
+			if (dto.stDept.equals(stDept)) {
+				return dto;
+			}
+		}
+		return null;
+	}
+	
 }
