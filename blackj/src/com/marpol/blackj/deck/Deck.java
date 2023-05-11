@@ -12,6 +12,35 @@ public class Deck {
 		String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
 		String[] ranks = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
 
+		
+//		      _____
+//	         |A_ _ |
+//	         |( v )|
+//	         | \ / |
+//	         |  .  |
+//	         |____V|
+//		
+//	         
+//	         private static final String[] ASCII_CARDS = {
+//	        	        "┌─────┐\n│%s    │\n│  %s  │\n│    %s│\n└─────┘",
+//	        	        "┌─────┐\n│%s     │\n│  %s  │\n│     %s│\n└─────┘",
+//	        	        "┌─────┐\n│%s     │\n│  %s  │\n│    %s│\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│  %s  │\n│%s    │\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│  %s  │\n│%s   │\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│ %s %s │\n│%s   │\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│ %s %s │\n│%s %s │\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│ %s %s │\n│%s%s │\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│%s %s %s│\n│%s%s │\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│%s %s %s│\n│%s%s%s│\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│%s%s%s│\n│%s%s%s│\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│%s%s%s│\n│%s%s%s│\n└─────┘",
+//	        	        "┌─────┐\n│%s    │\n│%s%s%s│\n│%s%s%s│\n└─────┘"
+//	        	    };
+//		
+		
+		
+		
+		
 		cards = new ArrayList<Card>();
 		for (String suit : suits) {
 			for (int i = 0; i < ranks.length; i++) {
