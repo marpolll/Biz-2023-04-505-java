@@ -21,5 +21,15 @@ public class DataIndex {
 		public static final int AUADD = 3;
 
 	}
+	
+	public static class PUBLISHER {
+
+		public static final int PUCODE = 0;
+		public static final int PUNAME = 1;
+		public static final int PUCEO = 2;
+		public static final int PUTEL = 3;
+		public static final int PUADD = 4;
+
+	}
 
 }
