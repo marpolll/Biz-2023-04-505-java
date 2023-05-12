@@ -75,7 +75,7 @@ public class BookServiceImplV2 implements BookService {
 		System.out.printf("%-20s\t\t",printTitle[DataIndex.BOOK.TITLE]);
 		System.out.printf("%s\t",printTitle[DataIndex.BOOK.PUBLISHER]);
 		System.out.printf("%s\t",printTitle[DataIndex.BOOK.AUTHOR]);
-		System.out.printf("%s\t",printTitle[DataIndex.BOOK.PUBLIST]);
+		System.out.printf("%-5s\t",printTitle[DataIndex.BOOK.PUBLIST]);
 		System.out.printf("%s\t\t",printTitle[DataIndex.BOOK.PAGES]);
 		System.out.printf("%s\n",printTitle[DataIndex.BOOK.PRICE]);
 		
