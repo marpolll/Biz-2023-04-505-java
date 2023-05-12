@@ -23,7 +23,7 @@ public class Rnd {
 				System.out.println(rndNum);
 			}
 		} 
-		System.out.printf("소수의 개수 : %d, 소수의 합 : %d\n" , rndCount , rndSum);
+		System.out.printf("소수의 개수 : %d, 소ssssss수의 합 : %d\n" , rndCount , rndSum);
 		System.out.printf("소수의 개수 : %d, 소수의 합 : %d\n" , rndCount , rndSum);
 	}
 }
