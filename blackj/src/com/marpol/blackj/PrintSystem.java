@@ -1,7 +1,7 @@
 package com.marpol.blackj;
 
 
-import com.marpol.models.Card;
+
 import com.marpol.models.GamePlayer;
 
 public class PrintSystem {

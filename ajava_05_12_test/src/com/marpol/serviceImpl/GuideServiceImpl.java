@@ -1,99 +1,86 @@
 package com.marpol.serviceImpl;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.marpol.dataindex.DataIndex;
-import com.marpol.dataindex.DataIndex.H;
 import com.marpol.dto.GuideDto;
 import com.marpol.service.GuideService;
-import com.marpol.utils.Utils;
 
 public class GuideServiceImpl implements GuideService {
 	
-	protected List<GuideDto> hList;
-
-	public GuideServiceImpl() {
-
-		hList = new ArrayList<>();
-	}
-
-	public void loadH() {
-
-		String hFile = "src/com/marpol/dataindex/guide.txt";
-
-		Scanner scan = null;
-		InputStream is = null;
-
-		try {
-			is = new FileInputStream(hFile);
-		} catch (FileNotFoundException e) {
-			System.out.println(hFile + "파일이 없습니다.");
-			return;
+	// 객체에 final 키워드를 부착하면 반드시 생성자에서  생성해주어야 한다
+		protected final List<GuideDto> guideList;	
+		public GuideServiceImpl() {
+			this.guideList = new ArrayList<>();
 		}
-		scan = new Scanner(is);
-
-		while (scan.hasNext()) {
-
-			String[] h = scan.nextLine().split(",");
-
-			GuideDto aDto = new GuideDto();
-			aDto.hId = h[DataIndex.H.HID];
-			aDto.hName = h[DataIndex.H.HNAME];
-			aDto.hCount = h[DataIndex.H.HCOUNT];
-			aDto.hHow = h[DataIndex.H.HHOW];
-			
-			hList.add(aDto);
-		}
-		scan.close();
-	}
-
-	public void printHList() {
 		
-		System.out.println(Utils.dLine(100));
-		System.out.println("id\t종목명\t순번\t가이드");
-		System.out.println(Utils.sLine(100));
-		for (GuideDto dto : hList) {
-			System.out.printf("%s\t", dto.hId);
-			
-			String nameA = dto.hName;
-			if(nameA.length() > 10) {
-				System.out.printf("%-20s\t", nameA.subSequence(0,10));
-			}else {
-				System.out.printf("%-20s\t",nameA);
-			}
-			
-			System.out.printf("%s\t", dto.hCount);
-			System.out.printf("%s\n", dto.hHow);
-			
-		}
-		System.out.println(Utils.sLine(100));
-	}
-
-
-	public GuideDto getH(String hid) {
-		for(GuideDto dto : hList) {
-			if(hList.isEmpty()) {
-				this.loadH();
-			}
-			if(dto.hId.equals(hid)) {
-				return dto;
-			}
-		}
-		return null;
-	}
-
-	public List<GuideDto> getHList() {
 		
-		if(hList.isEmpty()) {
-			this.loadH();
+		@Override
+		public void loadH() {
+
+			String guideFile = "src/com/callor/exam/guide.txt";
+			InputStream is = null;
+			Scanner scan = null;
+			
+			try {
+				is = new FileInputStream(guideFile);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			scan = new Scanner(is);
+			
+			int rows = 0;
+			while(scan.hasNext()) {
+				String line = scan.nextLine();
+				String[] guide = line.split(",");
+				
+				GuideDto guDto = new GuideDto();
+				try {
+					guDto.hId = guide[DataIndex.H.HID];
+					guDto.hName = guide[DataIndex.H.HNAME];
+					guDto.hCount = guide[DataIndex.H.HCOUNT];
+					guDto.hHow = guide[DataIndex.H.HHOW];
+					guideList.add(guDto);
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.out.println(rows + " 번째 에서 Exception 발생");
+				}
+				
+			}
+			scan.close();
+			System.out.println("로딩된 데이터 개수 : " + guideList.size() );
+			
 		}
-		return hList;
-	}
+
+		@Override
+		public void printHList() {
+			
+			System.out.println("=".repeat(150));
+			System.out.println("ID\t종목명\t순서\t가이드");
+			System.out.println("-".repeat(150));
+			
+			
+			String id = null;
+			for(GuideDto dto : guideList ) {
+				
+				if( id != null && !id.equals(dto.hId) ) {
+					System.out.println("-".repeat(150));
+				}
+				id = dto.hId;
+				
+				System.out.printf("%s\t", dto.hId);
+				System.out.printf("%s\t\t\t", dto.hName);
+				System.out.printf("%d\t\t", dto.hCount);
+				System.out.printf("%s\n", dto.hHow);
+			}
+			System.out.println("=".repeat(150));
+			
+		}
 
 }
 

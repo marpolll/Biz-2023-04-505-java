@@ -7,7 +7,7 @@ import com.marpol.models.GamePlayer;
 import com.marpol.models.Player;
 
 public class BlackJack {
-	
+
 	private Deck deck;
 	private Scanner scanner;
 
@@ -52,6 +52,7 @@ public class BlackJack {
 				} else {
 					break;
 				}
+				
 			}
 
 			// 딜러가 카드를 더 뽑는다.
