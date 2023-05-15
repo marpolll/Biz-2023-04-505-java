@@ -2,50 +2,51 @@ package com.marpol.blackj;
 
 import java.util.Scanner;
 
-import com.marpol.blackj.card.Card;
-import com.marpol.blackj.deck.Deck;
+import com.marpol.models.Dealer;
+import com.marpol.models.GamePlayer;
+import com.marpol.models.Player;
 
 public class BlackJack {
+	
 	private Deck deck;
 	private Scanner scanner;
-	private int playerScore;
-	private int dealerScore;
 
 	public BlackJack() {
 		deck = new Deck();
 		scanner = new Scanner(System.in);
-		playerScore = 0;
-		dealerScore = 0;
+
 	}
 
 	public void play() {
-		System.out.println("Welcome to BlackJack!");
+		System.out.println("블랙잭 게임을 시작합니다!");
 		while (true) {
 			// 플레이어가 카드를 뽑는다.
-			Card playerCard1 = deck.drawCard();
-			Card playerCard2 = deck.drawCard();
-			System.out.println("You drew a " + playerCard1.getRank() + " of " + playerCard1.getSuit() + " and a "
-					+ playerCard2.getRank() + " of " + playerCard2.getSuit() + ".");
-			playerScore += playerCard1.getValue() + playerCard2.getValue();
-			System.out.println("Your current score is " + playerScore + ".");
+			GamePlayer player = new Player();
+			GamePlayer dealer = new Dealer();
+			PrintSystem print = new PrintSystem();
 
-			// 딜러가 카드를 뽑는다.
-			Card dealerCard1 = deck.drawCard();
-			dealerScore += dealerCard1.getValue();
-			System.out.println("The dealer drew a " + dealerCard1.getRank() + " of " + dealerCard1.getSuit() + ".");
-			System.out.println("The dealer's current score is " + dealerScore + ".");
+			player.drawPlayerCard(deck.drawCard());
+			print.printProgress(player);
+
+			player.drawPlayerCard(deck.drawCard());
+			print.printProgress(player);
+
+			dealer.drawPlayerCard(deck.drawCard());
+			print.printProgress(dealer);
 
 			// 플레이어가 카드를 더 뽑을지 묻는다.
 			while (true) {
-				System.out.print("Do you want to draw another card? (y/n) ");
+				print.printTable(player, dealer);
+				System.out.print("카드를 더 뽑으시겠습니까? (y/n) ");
 				String answer = scanner.nextLine();
 				if (answer.equals("y")) {
-					Card playerCard = deck.drawCard();
-					System.out.println("You drew a " + playerCard.getRank() + " of " + playerCard.getSuit() + ".");
-					playerScore += playerCard.getValue();
-					System.out.println("Your current score is " + playerScore + ".");
-					if (playerScore > 21) {
-						System.out.println("You busted! The dealer wins.");
+					player.drawPlayerCard(deck.drawCard());
+					print.printProgress(player);
+
+					if (player.getPlayerScore() > 21) {
+						print.printTable(player, dealer);
+						System.out.println("플레이어 버스트!");
+						System.out.println("패배!");
 						return;
 					}
 				} else {
@@ -54,39 +55,38 @@ public class BlackJack {
 			}
 
 			// 딜러가 카드를 더 뽑는다.
-			while (dealerScore < 17) {
-				Card dealerCard = deck.drawCard();
-				dealerScore += dealerCard.getValue();
-				System.out.println("The dealer drew a " + dealerCard.getRank() + " of " + dealerCard.getSuit() + ".");
-				System.out.println("The dealer's current score is " + dealerScore + ".");
+			while (dealer.getPlayerScore() < 17) {
+				dealer.drawPlayerCard(deck.drawCard());
+				print.printProgress(dealer);
 			}
 
 			// 결과를 비교한다.
-			if (dealerScore > 21) {
-				System.out.println("The dealer busted! You win!");
-			} else if (playerScore > dealerScore) {
-				System.out.println("You win!");
-			} else if (playerScore == dealerScore) {
-				System.out.println("It's a tie.");
+			if (dealer.getPlayerScore() > 21) {
+				print.printTable(player, dealer);
+				System.out.println("딜러 버스트!");
+				System.out.println("승리!");
+			} else if (player.getPlayerScore() > dealer.getPlayerScore()) {
+				print.printTable(player, dealer);
+				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "\t딜러 점수 : " + dealer.getPlayerScore());
+				System.out.println("승리!");
+			} else if (player.getPlayerScore() == dealer.getPlayerScore()) {
+				print.printTable(player, dealer);
+				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "\t딜러 점수 : " + dealer.getPlayerScore());
+				System.out.println("무승부");
 			} else {
-				System.out.println("The dealer wins.");
+				print.printTable(player, dealer);
+				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "\t딜러 점수 : " + dealer.getPlayerScore());
+				System.out.println("패배!");
 			}
 
 			// 다시 게임을 할지 묻는다.
-			System.out.print("Do you want to play again? (y/n) ");
+			System.out.print("게임을 다시 하겠습니까? (y/n) ");
 			String answer = scanner.nextLine();
 			if (!answer.equals("y")) {
 				break;
 			}
 
-			// 점수를 초기화한다.
-			playerScore = 0;
-			dealerScore = 0;
 		}
 	}
 
-	public static void main(String[] args) {
-		BlackJack game = new BlackJack();
-		game.play();
-	}
 }
