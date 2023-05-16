@@ -7,14 +7,12 @@ import com.marpol.models.GamePlayer;
 import com.marpol.models.Player;
 
 public class BlackJack {
-
 	private Deck deck;
 	private Scanner scanner;
 
 	public BlackJack() {
 		deck = new Deck();
 		scanner = new Scanner(System.in);
-
 	}
 
 	public void play() {
@@ -47,12 +45,11 @@ public class BlackJack {
 						print.printTable(player, dealer);
 						System.out.println("플레이어 버스트!");
 						System.out.println("패배!");
-						return;
+						break;
 					}
 				} else {
 					break;
 				}
-				
 			}
 
 			// 딜러가 카드를 더 뽑는다.
@@ -68,15 +65,15 @@ public class BlackJack {
 				System.out.println("승리!");
 			} else if (player.getPlayerScore() > dealer.getPlayerScore()) {
 				print.printTable(player, dealer);
-				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "\t딜러 점수 : " + dealer.getPlayerScore());
+				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "딜러 점수 : " + dealer.getPlayerScore());
 				System.out.println("승리!");
 			} else if (player.getPlayerScore() == dealer.getPlayerScore()) {
 				print.printTable(player, dealer);
-				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "\t딜러 점수 : " + dealer.getPlayerScore());
+				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "딜러 점수 : " + dealer.getPlayerScore());
 				System.out.println("무승부");
 			} else {
 				print.printTable(player, dealer);
-				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "\t딜러 점수 : " + dealer.getPlayerScore());
+				System.out.println("플레이어 점수 : " + player.getPlayerScore() + "딜러 점수 : " + dealer.getPlayerScore());
 				System.out.println("패배!");
 			}
 
@@ -89,5 +86,4 @@ public class BlackJack {
 
 		}
 	}
-
 }

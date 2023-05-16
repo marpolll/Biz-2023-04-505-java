@@ -32,24 +32,37 @@ public class StudentServiceImplV1 implements StudentService {
 			System.out.println("학생정보 추가 종료하려면 QUIT 입력");
 			System.out.println(Line.sLine(60));
 
-			System.out.print("학번 >> ");
-			String stNum = scan.nextLine();
-			if (stNum.equals("QUIT")) break;
+			
+			String stNum  = "";
+			while(true) {
+				System.out.print("학번(정수) >> ");
+				stNum = scan.nextLine();
+				if (stNum.equals("QUIT")) break;
+				try {
+					int intNum = Integer.valueOf(stNum);
+					stNum = String.format("%04d", intNum);
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.out.println("학번은 정수로 입력하세요");
+					continue;
+				}
+				break;
+			}
+			if(stNum.equals("QUIT")) break;
 
 			System.out.print("이름 >> ");
 			String stName = scan.nextLine();
-			if (stNum.equals("QUIT")) break;
+			if (stName.equals("QUIT")) break;
 
 			System.out.print("학과 >> ");
 			String stDept = scan.nextLine();
-			if (stNum.equals("QUIT")) break;
+			if (stDept.equals("QUIT")) break;
 
 			int intGrade = 0;
 			while (true) {
 				System.out.print("학년 >> ");
 				String strGrade = scan.nextLine();
-				if (stNum.equals("QUIT")) break;
-			
+				if (strGrade.equals("QUIT")) break;
 				try {
 					intGrade = Integer.valueOf(strGrade);
 				} catch (Exception e) {
@@ -67,7 +80,7 @@ public class StudentServiceImplV1 implements StudentService {
 
 			System.out.print("전화번호 >> ");
 			String stTel = scan.nextLine();
-			if (stNum.equals("QUIT")) break;
+			if (stTel.equals("QUIT")) break;
 
 			StudentDto stDto = new StudentDto();
 			stDto.stNum = stNum;
@@ -79,6 +92,7 @@ public class StudentServiceImplV1 implements StudentService {
 
 		} // end while
 		System.out.println("학생정보 입력 종료!!");
+		// 현재 입력한 학생정보의 stdList 가 모두 만들어진 상태
 	}
 
 	@Override
@@ -89,7 +103,7 @@ public class StudentServiceImplV1 implements StudentService {
 
 	@Override
 	public void printStudent() {
-
+		
 		System.out.println(Line.dLine(100));
 		System.out.println("대한 고교 학생 리스트");
 		System.out.println(Line.dLine(100));
