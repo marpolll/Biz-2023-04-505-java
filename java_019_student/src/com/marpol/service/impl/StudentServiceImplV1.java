@@ -103,7 +103,7 @@ public class StudentServiceImplV1 implements StudentService {
 
 	@Override
 	public void printStudent() {
-		
+
 		System.out.println(Line.dLine(100));
 		System.out.println("대한 고교 학생 리스트");
 		System.out.println(Line.dLine(100));
@@ -134,5 +134,4 @@ public class StudentServiceImplV1 implements StudentService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

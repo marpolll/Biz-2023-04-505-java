@@ -188,7 +188,7 @@ public class StudentServiceImplV2 extends StudentServiceImplV1 {
 		System.out.println("여기는 V2");
 		OutputStream os = null;
 		PrintWriter out = null;
-
+		
 		try {
 			os = new FileOutputStream(Config.STUDENT_FILE);
 			out = new PrintWriter(os);
