@@ -1,7 +1,5 @@
 package com.marpol.authors;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.marpol.books.models.AuthorDto;
 import com.marpol.books.service.AuthorService;

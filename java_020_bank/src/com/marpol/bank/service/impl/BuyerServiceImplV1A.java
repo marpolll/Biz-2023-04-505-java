@@ -1,9 +1,9 @@
 package com.marpol.bank.service.impl;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -43,6 +43,7 @@ public class BuyerServiceImplV1A implements BuyerService{
 
 		int rows = 0;
 		while (scan.hasNext()) {
+			
 			String line = scan.nextLine();
 			String[] buyer = line.split("\t");
 			rows++;
@@ -58,16 +59,23 @@ public class BuyerServiceImplV1A implements BuyerService{
 				buyerList.add(buDto);
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println(rows + " 라인에서 Exception 발생");
+				System.out.println(rows + " 라인에서 Exception 발생");  // buyer.txt 에 1번 데이터가 공백이면 1라인에서 익셉션 발생 
 			}
 		}
-//		System.out.println("Load 한 데이터 개수 : " + buyerList.size());
+		System.out.println("Load 한 데이터 개수 : " + buyerList.size());
 	}
 		
 
-	@Override
+	// 고객ID 를 전달받아 고객정보(Dto)를 리턴
 	public BuyerDto getBuyer(String buId) {
-		// TODO Auto-generated method stub
+		
+		if(buyerList.isEmpty()) {
+			loadBuyer();
+		}
+		for(BuyerDto dto : buyerList) {
+			if(dto.buId.equals(buId))
+				return dto;
+			}
 		return null;
 	}
 	

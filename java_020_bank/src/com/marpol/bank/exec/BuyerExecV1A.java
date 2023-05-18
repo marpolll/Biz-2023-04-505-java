@@ -1,5 +1,8 @@
 package com.marpol.bank.exec;
 
+import java.util.Scanner;
+
+import com.marpol.bank.model.BuyerDto;
 import com.marpol.bank.service.BuyerService;
 import com.marpol.bank.service.impl.BuyerServiceImplV1A;
 
@@ -23,6 +26,12 @@ public class BuyerExecV1A {
 		// buService.printBuyerList(out);
 		// out.close();
 		buService.printBuyerList();
+		
+		// 왜 안될까 ????????????????
+		BuyerDto buDto = buService.getBuyer("0001");
+		System.out.println(buDto);
+		
+		
 		
 	}
 
