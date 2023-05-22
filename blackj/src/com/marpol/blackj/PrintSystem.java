@@ -2,6 +2,7 @@ package com.marpol.blackj;
 
 
 
+import com.marpol.models.AnsiColor;
 import com.marpol.models.GamePlayer;
 
 public class PrintSystem {
@@ -52,6 +53,7 @@ public void printProgress(GamePlayer player) {
 }
 
 public void printTable(GamePlayer player, GamePlayer dealer) {
+	
 	
 	System.out.println("=".repeat(100));
 

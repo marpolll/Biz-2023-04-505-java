@@ -2,6 +2,7 @@ package com.marpol.blackj;
 
 import java.util.Scanner;
 
+import com.marpol.models.AnsiColor;
 import com.marpol.models.Dealer;
 import com.marpol.models.GamePlayer;
 import com.marpol.models.Player;
@@ -51,7 +52,7 @@ public class BlackJack {
 					break;
 				}
 			}
-
+			
 			// 딜러가 카드를 더 뽑는다.
 			while (dealer.getPlayerScore() < 17) {
 				dealer.drawPlayerCard(deck.drawCard());
@@ -81,9 +82,9 @@ public class BlackJack {
 			System.out.print("게임을 다시 하겠습니까? (y/n) ");
 			String answer = scanner.nextLine();
 			if (!answer.equals("y")) {
+				System.out.println("게임을 종료합니다.");
 				break;
 			}
-
 		}
 	}
 }

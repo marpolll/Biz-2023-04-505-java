@@ -44,17 +44,17 @@ public class DateExecA {
 		// java 1.8 부터 사용 하는 날짜 type 의 객체
 		LocalDate localDate = LocalDate.now();
 		LocalTime localTime = LocalTime.now();
-		LocalDateTime loclDateTime = LocalDateTime.now();
+		LocalDateTime localDateTime = LocalDateTime.now();
 		
 		DateTimeFormatter dateFormat1 = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 		DateTimeFormatter timeFormat1 = DateTimeFormatter.ofPattern("HH:mm:ss");
 		
 		System.out.println(localDate.format(dateFormat1));
-		System.out.println(localTime.format(dateFormat1));
+		System.out.println(localTime.format(timeFormat1));
 		
-//		System.out.println(LocalDateTime.for);
-		
-		
+		System.out.println(localDateTime.format(dateFormat1));
+		System.out.println(localDateTime.format(timeFormat1));
+
 		
 	}
 

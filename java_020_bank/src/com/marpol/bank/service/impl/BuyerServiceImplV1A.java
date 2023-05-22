@@ -160,7 +160,7 @@ public class BuyerServiceImplV1A implements BuyerService{
 				buDto == null ? "신규" : buDto.buBirth);
 		String buBirth= scan.nextLine();
 		if(buBirth.equals("QUIT")) return null;
-		if(buId.equals("")) buId = buDto.buId;
+		if(buId.equals("")) buId = buDto.buBirth;
 		
 		System.out.printf("직업(%s) >> ",
 				buDto == null ? "신규" : buDto.buJob);
@@ -176,6 +176,7 @@ public class BuyerServiceImplV1A implements BuyerService{
 		buDto.buAddr = buAddr ;
 		buDto.buBirth = buBirth;
 		buDto.buJob = buJob	;
+		
 		return buDto;
 		
 	}
