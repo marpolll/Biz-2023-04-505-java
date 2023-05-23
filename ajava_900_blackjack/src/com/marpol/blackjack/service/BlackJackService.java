@@ -47,7 +47,7 @@ public class BlackJackService {
 				maxScorePlayer = playerName;
 			}
 		}
-		System.out.printf("%s 승리, 점수 : %d", maxScorePlayer, maxScore);
+		System.out.printf("%s 승리, 점수 : %d\n", maxScorePlayer, maxScore);
 
 		if (playerList.get(0).getScore() > playerList.get(1).getScore()
 				&& playerList.get(0).getScore() > playerList.get(2).getScore()) {
@@ -57,7 +57,7 @@ public class BlackJackService {
 			System.out.println("플레이어 승리");
 		} else if (playerList.get(0).getScore() == playerList.get(1).getScore()) {
 			System.out.println("타짜 무승부");
-		}else if (playerList.get(0).getScore() == playerList.get(2).getScore()) {
+		} else if (playerList.get(0).getScore() == playerList.get(2).getScore()) {
 			System.out.println("영수 무승부");
 		} else if ( playerList.get(1).getScore() > 21) {
 			System.out.println("타짜 패배");

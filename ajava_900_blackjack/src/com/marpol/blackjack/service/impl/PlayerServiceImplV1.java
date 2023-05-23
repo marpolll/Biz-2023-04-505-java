@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.marpol.blackjack.models.CardDto;
 import com.marpol.blackjack.service.PlayerService;
+import com.marpol.blackjack.utlis.AnsiColor;
 import com.marpol.blackjack.utlis.Line;
 /*
  * hit() : 카드 받기
@@ -38,13 +39,20 @@ public class PlayerServiceImplV1 implements PlayerService{
 
 	public void showDeck() {
 		System.out.println(Line.dLine(100));
-		System.out.printf("%s, 받은카드 : %d매\n", playerName, deckList.size());
+		
+		System.out.printf("%s, 받은카드 : %d매, 점수 : %d\n", 
+				playerName, deckList.size(), this.getScore());
+		
 		System.out.println(Line.sLine(100));
 		String[] patterns = deckList.get(0).getPattern();
 		
 		for(int rows = 0 ; rows < patterns.length ; rows ++) {
 			for(CardDto cardDto : deckList) {
-				System.out.print(cardDto.getPattern()[rows]);
+				if("◆,♥".contains(cardDto.suit)) {
+					System.out.print(AnsiColor.RED(cardDto.getPattern()[rows]));	
+				} else {
+					System.out.print(AnsiColor.CYAN(cardDto.getPattern()[rows]));
+				}
 			}
 			System.out.println();
 		}
@@ -63,4 +71,5 @@ public class PlayerServiceImplV1 implements PlayerService{
 	public String getPlayName() {
 		return this.playerName;
 	}
+
 }

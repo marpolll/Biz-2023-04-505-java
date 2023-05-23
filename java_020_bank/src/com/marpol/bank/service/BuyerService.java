@@ -1,6 +1,5 @@
 package com.marpol.bank.service;
 
-import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import com.marpol.bank.model.BuyerDto;
