@@ -13,7 +13,7 @@ public class AccDto {
 //	NUMBER
 	
 	public String acNum;
-	public String acDate;
+	public String acDiv;
 	public String acBuId;
 	public int acBalance;
 	
@@ -25,10 +25,10 @@ public class AccDto {
 	}
 
 	// filed, 임의 생성자
-	public AccDto(String acNum, String acDate, String acBuId, int acBalance) {
+	public AccDto(String acNum, String acDiv, String acBuId, int acBalance) {
 		super();
 		this.acNum = acNum;
-		this.acDate = acDate;
+		this.acDiv = acDiv;
 		this.acBuId = acBuId;
 		this.acBalance = acBalance;
 	}
@@ -37,7 +37,7 @@ public class AccDto {
 
 	@Override
 	public String toString() {
-		return "AccDto [acNum=" + acNum + ", acDate=" + acDate + ", acBuId=" + acBuId + ", acBalance=" + acBalance
+		return "AccDto [acNum=" + acNum + ", acDate=" + acDiv + ", acBuId=" + acBuId + ", acBalance=" + acBalance
 				+ "]";
 	}
 

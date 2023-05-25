@@ -28,7 +28,7 @@ public class BuyerServiceImplV1 implements BuyerService {
 		try {
 			BuyerDto buyerDto = new BuyerDto();
 			buyerDto.buId = result.getString(DBContract.BUYER.BUID);
-			buyerDto.biName = result.getString(DBContract.BUYER.BINAME);
+			buyerDto.buName = result.getString(DBContract.BUYER.BUNAME);
 			buyerDto.buTel = result.getString(DBContract.BUYER.BUTEL);
 			buyerDto.buAddr = result.getString(DBContract.BUYER.BUADDR);
 			buyerDto.buBirth = result.getString(DBContract.BUYER.BUBIRTH);
@@ -46,7 +46,7 @@ public class BuyerServiceImplV1 implements BuyerService {
 		List<BuyerDto> buyerList = new ArrayList<>();
 		String sql = 
 				" SELECT "
-				+ " buid, biname, butel, buaddr, bubirth, bujob "
+				+ " buid, buname, butel, buaddr, bubirth, bujob "
 				+ " FROM tbl_buyer "
 				+ " ORDER BY buid ";
 		
@@ -87,7 +87,7 @@ public class BuyerServiceImplV1 implements BuyerService {
 	@Override
 	public BuyerDto findById(String id) {
 		String sql = 
-				" SELECT buid, biname, butel, buaddr, bubirth, bujob "
+				" SELECT buid, buname, butel, buaddr, bubirth, bujob "
 				+ " FROM tbl_buyer "
 				+ " WHERE buid = ? ";
 				
@@ -108,13 +108,13 @@ public class BuyerServiceImplV1 implements BuyerService {
 
 	@Override
 	public int insert(BuyerDto dto) {
-		String sql = " INSERT INTO tbl_buyer(buid, biname, butel) "
+		String sql = " INSERT INTO tbl_buyer(buid, buname, butel) "
 				+ " VALUES(?,?,?) ";
 
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
 			pStr.setString(1, dto.buId);
-			pStr.setString(2, dto.biName);
+			pStr.setString(2, dto.buName);
 			pStr.setString(3, dto.buTel);
 			
 			// sql 로 전달하는 명령대로 DB 를 변경(insert)하라 라는 의미
@@ -132,7 +132,7 @@ public class BuyerServiceImplV1 implements BuyerService {
 	public int update(BuyerDto dto) {
 		
 		String sql = " UPDATE tbl_buyer "
-				+" SET biname = ? ,"
+				+" SET buname = ? ,"
 				+" butel =  ? ,"
 			    +" buaddr = ? ,"
 			    +" bubirth = ? ,"
@@ -141,7 +141,7 @@ public class BuyerServiceImplV1 implements BuyerService {
 		
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
-			pStr.setString(1, dto.biName);
+			pStr.setString(1, dto.buName);
 			pStr.setString(2, dto.buTel);
 			pStr.setString(3, dto.buAddr);
 			pStr.setString(4, dto.buBirth);

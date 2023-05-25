@@ -31,7 +31,7 @@ public class AccServiceImplV1 implements AccService {
 
 		AccDto accDto = new AccDto();
 		accDto.acNum = result.getString(DBContract.ACC.ACC_NUM);
-		accDto.acDate = result.getString(DBContract.ACC.ACC_DATE);
+		accDto.acDiv = result.getString(DBContract.ACC.ACC_DIV);
 		accDto.acBuId = result.getString(DBContract.ACC.ACC_ID);
 		// accDto.acBalance = result.getString(DBContract.ACC.ACC_BALANCE);
 
@@ -74,7 +74,7 @@ public class AccServiceImplV1 implements AccService {
 	
 	public List<AccDto> selectAll() {
 
-		String sql = " SELECT acNum, acDate,acBuId,acBalance " 
+		String sql = " SELECT acNum, acDiv,acBuId,acBalance " 
 						+ " FROM tbl_acc " 
 						+ " ORDER BY acNum ";
 
@@ -99,11 +99,13 @@ public class AccServiceImplV1 implements AccService {
 	
 	
 	public AccDto findById(String acNum) {
-		String sql = " SELECT acNum, acDate,acBuId,acBalance " + " FROM tbl_acc " + " WHERE acNum = ? ";
+		String sql = " SELECT acNum, acDiv,acBuId,acBalance " + " FROM tbl_acc " + " WHERE acNum = ? ";
 
 		PreparedStatement pStr;
 		try {
 			pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, acNum);
+			
 			ResultSet result = pStr.executeQuery();
 
 			if (result.next()) {
@@ -122,7 +124,7 @@ public class AccServiceImplV1 implements AccService {
 	
 	public List<AccDto> findByBuId(String acBuId) {
 
-		String sql = " SELECT acNum, acDate,acBuId,acBalance " 
+		String sql = " SELECT acNum, acDiv,acBuId,acBalance " 
 				+ " FROM tbl_acc " 
 				+ " WHERE acBuId = ? "
 				+ " ORDER BY acNum ";
@@ -152,24 +154,21 @@ public class AccServiceImplV1 implements AccService {
 	
 	public int insert(AccDto dto) {
 		
-		String sql = " INSERT INTO tbl_acc(acnum, acdate, acbalance) "
-				+ " VALUES(?,?,?) ";
+		String sql = " INSERT INTO tbl_acc(acBuId, acNum, acDiv, acBalance) " + " VALUES(?,?,?,?) ";
 
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
-			pStr.setString(1, dto.acNum);
-			pStr.setString(2, dto.acDate);
-			pStr.setInt(3, dto.acBalance);
-			
+			pStr.setString(1, dto.acBuId);
+			pStr.setString(2, dto.acNum);
+			pStr.setString(3, dto.acDiv);
+			pStr.setInt(4, dto.acBalance);
+
+			// sql 로 전달하는 명령대로 DB 를 변경(insert)하라 라는 의미
 			int result = pStr.executeUpdate();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 		return 0;
 	}
 
@@ -180,11 +179,36 @@ public class AccServiceImplV1 implements AccService {
 	
 	
 	
-	
+	/*
+	 * 계좌정보 전체(또는 부분)을 업데이트 하는 method
+	 * SQL 을 보면 전체 칼럼을 모두 업데이트 하고 있다.
+	 * 
+	 * 업데이트 method 를 호출하는 곳에서는 반드시 AccDto 객체를 잘 관리 해야 한다.
+	 * 		변경할 칼럼의 데이터만 변경하고
+	 * 		그렇지 않을(변경하지 않을) 칼럼은 원래 값을 그대로 유지
+	 */
 	public int update(AccDto dto) {
 		
+		String sql = " UPDATE tbl_acc SET  " 
+				+ " acBuid = ?, "
+				+ " acDiv = ?, "
+				+ " acBalance = ? "
+				+ " WHERE acNum = ? ";
 		
-		
+		PreparedStatement pStr;
+		try {
+			pStr = dbConn.prepareStatement(sql);
+			
+			pStr.setString(1, dto.acBuId);
+			pStr.setString(2, dto.acDiv);
+			pStr.setInt(3, dto.acBalance);
+			pStr.setString(4, dto.acNum);
+			
+			return pStr.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}
@@ -220,7 +244,9 @@ public class AccServiceImplV1 implements AccService {
 			
 			ResultSet result = pStr.executeQuery();
 			if(result.next()) {
-				return result.getString(1);
+				String maxNum = result.getString(1);
+				if(maxNum == null) return "0";
+				else return maxNum;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

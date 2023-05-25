@@ -16,7 +16,7 @@ public class DBContract {
 	public static class BUYER {
 		
 		public static final int BUID = 1;
-		public static final int BINAME = 2;
+		public static final int BUNAME = 2;
 		public static final int BUTEL = 3;
 		public static final int BUADDR = 4;
 		public static final int BUBIRTH = 5;
@@ -28,7 +28,7 @@ public class DBContract {
 	public static class ACC {
 		
 		public static final int ACC_NUM = 1;
-		public static final int ACC_DATE = 2;
+		public static final int ACC_DIV = 2;
 		public static final int ACC_ID = 3;
 		public static final int ACC_BALANCE = 4;
 		
@@ -37,6 +37,10 @@ public class DBContract {
 	
 	public static String[] ACC_DIV = {
 			"입출금계좌","적금계좌","대출계좌"
+	};
+	
+	public static String[] ACC_LISTDIV = {
+			"계좌번호","날짜","시간","구분","입금","출금","잔액"
 	};
 	
 

@@ -34,7 +34,7 @@ import com.marpol.bank.models.BuyerDto;
 			 * 
 			 */
 			String sql = " SELECT "
-					+ " buid, biname, butel, buaddr, bubirth, bujob "
+					+ " buid, buname, butel, buaddr, bubirth, bujob "
 					+ " FROM tbl_buyer ";
 			
 			// DB 와 연결하기 위한 Input 장치
@@ -76,7 +76,7 @@ import com.marpol.bank.models.BuyerDto;
 				while(result.next()) {
 					BuyerDto buyerDto = new BuyerDto();
 					buyerDto.buId =  result.getString(DBContract.BUYER.BUID);
-					buyerDto.biName =  result.getString(DBContract.BUYER.BINAME);
+					buyerDto.buName =  result.getString(DBContract.BUYER.BUNAME);
 					buyerDto.buTel =  result.getString(DBContract.BUYER.BUTEL);
 					buyerDto.buAddr =  result.getString(DBContract.BUYER.BUADDR);
 					buyerDto.buBirth =  result.getString(DBContract.BUYER.BUBIRTH);

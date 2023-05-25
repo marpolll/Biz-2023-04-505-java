@@ -3,7 +3,7 @@ package com.marpol.bank.models;
 public class BuyerDto {
 	
 public String buId;
-public String biName;
+public String buName;
 public String buTel;
 public String buAddr;
 public String buBirth;
@@ -18,10 +18,10 @@ public BuyerDto() {
 
 
 
-public BuyerDto(String buId, String biName, String buTel, String buAddr, String buBirth, String buJob) {
+public BuyerDto(String buId, String buName, String buTel, String buAddr, String buBirth, String buJob) {
 	super();
 	this.buId = buId;
-	this.biName = biName;
+	this.buName = buName;
 	this.buTel = buTel;
 	this.buAddr = buAddr;
 	this.buBirth = buBirth;
@@ -32,7 +32,7 @@ public BuyerDto(String buId, String biName, String buTel, String buAddr, String 
 
 @Override
 public String toString() {
-	return "BuyerDto [buId=" + buId + ", biName=" + biName + ", buTel=" + buTel + ", buAddr=" + buAddr + ", buBirth="
+	return "BuyerDto [buId=" + buId + ", biName=" + buName + ", buTel=" + buTel + ", buAddr=" + buAddr + ", buBirth="
 			+ buBirth + ", buJob=" + buJob + "]";
 }
 

@@ -30,7 +30,7 @@ public class DbExecB {
 			 * 
 			 */
 			String sql = " SELECT "
-					+ " buid, biname, butel, buaddr, bubirth, bujob "
+					+ " buid, buname, butel, buaddr, bubirth, bujob "
 					+ " FROM tbl_buyer ";
 			
 			// DB 와 연결하기 위한 Input 장치
@@ -69,7 +69,7 @@ public class DbExecB {
 				// 이때 더이상 읽을(가져올)데이터가 없으면 next() 는 false return
 				while(result.next()) {
 					System.out.print(result.getString(DBContract.BUYER.BUID) + "\t");
-					System.out.print(result.getString(DBContract.BUYER.BINAME) + "\t");
+					System.out.print(result.getString(DBContract.BUYER.BUNAME) + "\t");
 					System.out.print(result.getString(DBContract.BUYER.BUTEL) + "\t");
 					System.out.print(result.getString(DBContract.BUYER.BUADDR) + "\t");
 					System.out.print(result.getString(DBContract.BUYER.BUBIRTH) + "\t");
