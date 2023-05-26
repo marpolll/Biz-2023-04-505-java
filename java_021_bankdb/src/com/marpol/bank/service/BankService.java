@@ -32,7 +32,7 @@ public class BankService {
 	}
 
 	public void insertAccList2() {
-		
+
 		// 고객정보 확인
 		printBuyerList();
 		findUserInfo2();
@@ -42,146 +42,102 @@ public class BankService {
 			System.out.println(Line.sLine(100));
 			System.out.println("계좌 입력 >>  ");
 			String acNum = scan.nextLine();
-			
+
 			// 계좌번호를 사용하여 tbl_acc 테이블에서 데이터 조회
 			// accDto 에는 acNum 계좌번호에 해당하는 데이터가 모두 담긴 상태
 			AccDto accDto = accService.findById(acNum);
 
-			if(accDto == null) {
+			if (accDto == null) {
 				System.out.printf("계좌번호를 확인하세요($s)", acNum);
 				continue;
 			}
 			System.out.println("거래구분(1입금, 2출금, -1종료) >>");
 			String aioDiv = scan.nextLine();
-			int intDiv = 0;
 			
+			int intDiv = 0;
+
 			try {
 				intDiv = Integer.valueOf(aioDiv);
 			} catch (Exception e) {
-				System.out.printf("선택이 잘못되었다.(%s)" , aioDiv);
+				System.out.printf("선택이 잘못되었다.(%s)", aioDiv);
 				continue;
 			}
-			if(intDiv == -1 ) {
+			if (intDiv == -1) {
 				System.out.println("입출금 업무중단");
 				break;
 			}
-			
-			if(intDiv != 1 && intDiv !=2) {
+
+			if (intDiv != 1 && intDiv != 2) {
 				System.out.println("1,  2 중에서 선택하세요");
 				continue;
 			}
-			
-			String[] divs = {"입금","출금"};
-			
+
+			String[] divs = { "입금", "출금" };
+
 			int intAmt = 0;
-			
-			while(true) {
-				String prompt = divs[intDiv-1];
-				System.out.printf("%s (QUIT : 종료) >> ", divs[intDiv-1]);
+
+			while (true) {
+				String prompt = divs[intDiv - 1];
+				System.out.printf("%s (QUIT : 종료) >> ", divs[intDiv - 1]);
 				String amount = scan.nextLine();
-				
-				if(amount.equals("QUIT")) {
+
+				if (amount.equals("QUIT")) {
 					intAmt = -1;
 					break;
 				}
-				
+
 				try {
 					intAmt = Integer.valueOf(amount);
 				} catch (Exception e) {
-					System.out.printf(" %s 금액은 정수로 입력하세요\n",prompt);
+					System.out.printf(" %s 금액은 정수로 입력하세요\n", prompt);
 					continue;
 				}
-				
-				if(aioDiv.equals("2")) {
+
+				if (aioDiv.equals("2")) {
 					int balance = accDto.acBalance;
-					if(balance < intAmt) {
+					if (balance < intAmt) {
 						System.out.printf("잔액(%d)가 부족하여 출금할수 없습니다.\n", balance);
 						continue;
 					}
 				}
 				break;
 			} // 입출금입력 while end
-			
-			if(intAmt < 0) break;
-			
-			
-			
+
+			if (intAmt < 0)
+				break;
+
 			AccListDto ioDto = new AccListDto();
-			
+
 			Date date = new Date(System.currentTimeMillis());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 			SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
 			ioDto.aioDate = dateFormat.format(date);
 			ioDto.aioTime = timeFormat.format(date);
-			
+
 			ioDto.aioDiv = aioDiv;
 			ioDto.acNum = acNum;
-			
-			if(aioDiv.equals("1")) {
+
+			if (aioDiv.equals("1")) {
 				ioDto.aioInput = intAmt;
-			}else if (aioDiv.equals("2")) {
+			} else if (aioDiv.equals("2")) {
 				ioDto.aioOutput = intAmt;
-				intAmt *= -1;  // 아래 + intAmt 하나만 쓰기 위해서
+				intAmt *= -1; // 아래 + intAmt 하나만 쓰기 위해서
 			}
-			
+
 			accListService.insert(ioDto);
-			
+
 			accDto.acBalance = accDto.acBalance + intAmt;
 			accService.update(accDto);
-				
+
 		}
-	
-		
+
 	}
-	
-	
+
 	public void insertAccList() {
 
-		this.printBuyerList();
-
-		System.out.println("조회할 고객ID를 입력하세요");
-		System.out.print("고객ID >> ");
-		String strBuId = scan.nextLine();
-
-		BuyerDto buyerDto = buyerService.findById(strBuId);
-
-		if (buyerDto == null) {
-			System.out.println("고객ID 가 없습니다");
-			return;
-		} else {
-			System.out.println(Line.sLine(100));
-			System.out.printf("고객ID :  %s\n", buyerDto.buId);
-			System.out.printf("이름 :  %s\n", buyerDto.buName);
-			System.out.printf("전화번호 :  %s\n", buyerDto.buTel);
-			System.out.printf("주소 :  %s\n", buyerDto.buAddr);
-			System.out.println(Line.sLine(100));
-		}
-
-		List<AccDto> accList = accService.findByBuId(strBuId);
-		if (accList.isEmpty()) {
-			System.out.println("고객의 계좌정보가 없습니다");
-			return;
-		} else {
-			System.out.println(Line.sLine(100));
-			System.out.println("계좌번호\t구분\t잔액");
-			System.out.println(Line.sLine(100));
-			for (AccDto accDto : accList) {
-				System.out.printf("%s\t", accDto.acNum);
-
-				int intDate = 0;
-				try {
-					intDate = Integer.valueOf(accDto.acDiv);
-
-					System.out.printf("%s\t", DBContract.ACC_DIV[intDate - 1]);
-
-				} catch (Exception e) {
-					System.out.printf("%s\t", "종류불명");
-				}
-				System.out.printf("%d\n", accDto.acBalance);
-			}
-			System.out.println(Line.sLine(100));
-		}
+		printBuyerList();
+		findUserInfo2();
 
 		AccDto accDto = new AccDto();
 		AccListDto accListDto = new AccListDto();
@@ -216,11 +172,9 @@ public class BankService {
 		accListDto.aioTime = nowTime.format(date);
 		accListService.insert(accListDto);
 
-
 		System.out.println(Line.sLine(100));
 		System.out.println("계좌번호\t날짜\t\t시간\t \t구분\t\t입금\t출금\t잔액");
 		System.out.println(Line.sLine(100));
-
 
 		System.out.printf("%s\t", accListDto.acNum);
 
@@ -228,49 +182,25 @@ public class BankService {
 
 		System.out.printf("%s\t", accListDto.aioTime);
 
-		int intDate = 0;
-		try {
-			intDate = Integer.valueOf(accListDto.aioDiv);
+		System.out.printf("%d\t", accListDto.aioInput);
 
-			System.out.printf("%s\t", DBContract.ACC_DIV[intDate - 1]);
+		System.out.printf("%d\t", accListDto.aioOutput);
 
-		} catch (Exception e) {
-			System.out.printf("%s\t", "종류불명");
+		accDto.acBalance = accDto.acBalance + accListDto.aioInput;
+		accService.update(accDto);
+
+		if (accListDto.aioInput > 0) {
+			System.out.printf("%d\n", accDto.acBalance + accListDto.aioInput);
+		} else if (accListDto.aioOutput > 0) {
+			System.out.printf("%d\n", accDto.acBalance - accListDto.aioOutput);
+		} else if (accListDto.aioOutput > accDto.acBalance) {
+			System.out.println("계좌에 잔액이 부족합니다.");
 		}
 
-			System.out.printf("%d\t", accListDto.aioInput);
-
-			System.out.printf("%d\t", accListDto.aioOutput);
-			
-			
-			accDto.acBalance = accDto.acBalance + accListDto.aioInput;
-			accService.update(accDto);
-			
-
-			if (accListDto.aioInput > 0) {
-				System.out.printf("%d\n", accDto.acBalance + accListDto.aioInput);
-			}else if(accListDto.aioOutput > 0 ) {
-				System.out.printf("%d\n", accDto.acBalance - accListDto.aioOutput);
-			}else if(accListDto.aioOutput > accDto.acBalance) {
-				System.out.println("계좌에 잔액이 부족합니다.");
-			}
-		
 		System.out.println(Line.sLine(100));
-		
-		
-		
+
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void makeAccount() {
 
 		while (true) {
