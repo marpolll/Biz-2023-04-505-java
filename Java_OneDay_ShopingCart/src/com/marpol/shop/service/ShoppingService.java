@@ -1,7 +1,6 @@
 package com.marpol.shop.service;
 
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -49,42 +48,145 @@ public class ShoppingService {
 
 	public void printIoList() {
 
-
-		System.out.println("=".repeat(150));
-		System.out.println("상품판매 리스트");
-		System.out.println("=".repeat(150));
+		ioList = ioListService.selecAll();
+		
+		System.out.println("=".repeat(100));
+		System.out.println("전체거래 리스트");
+		System.out.println("=".repeat(100));
 		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
-		System.out.println("-".repeat(150));
-
-		for (IoListDto ioListDto : ioList) {
-			System.out.printf("%s\t", ioListDto.ioDate);
-			System.out.printf("%s\t", ioListDto.ioTime);
-		}
-
-		for (BuyerDto buyerDto : buyerList) {
-
-			System.out.printf("%s\t", buyerDto.buId);
+		System.out.println("-".repeat(100));
+		for (IoListDto ioDto : ioList) {
+			System.out.printf("%s\t", ioDto.ioDate);
+			System.out.printf("%s\t", ioDto.ioTime);
+			System.out.printf("%s\t", ioDto.ioBuId);
+			BuyerDto buyerDto = buyerService.findById(ioDto.ioBuId);
 			System.out.printf("%s\t", buyerDto.buName);
 			System.out.printf("%s\t", buyerDto.buTel);
+			System.out.printf("%s\t", ioDto.ioPCode);
+			ProductDto pdDto = productService.findByCode(ioDto.ioPCode);
+			System.out.printf("%s\t", pdDto.pName);
+			System.out.printf("%s\t", ioDto.ioPrice);
+			System.out.printf("%s\t", ioDto.ioQuan);
+			System.out.println(ioDto.ioPrice * ioDto.ioQuan);
 		}
-
-		for (ProductDto productDto : productList) {
-
-			System.out.printf("%s\t", productDto.pCode);
-			System.out.printf("%s\t", productDto.pName);
-		}
-
-		for (IoListDto ioListDto : ioList) {
-			System.out.printf("%s\t", ioListDto.ioPrice);
-			System.out.printf("%s\t", ioListDto.ioQuan);
-			System.out.printf("%s\t", ioListDto.ioQuan * ioListDto.ioPrice);
-		}
-
 		System.out.println("-".repeat(150));
+	}
+
+	public void printByBuyerList() {
+		
+		ioList = ioListService.selecAll();
+		
+		System.out.print("고객이름 입력 >> ");
+		String strName = scan.nextLine();
+		
+		buyerList = buyerService.findByName(strName);
+		IoListDto ioDto = ioListService.findByBuId(byDto.buID);
+		ProductDto pdDto = productService.findByCode(ioDto.ioPCode);
+		
+		System.out.println("=".repeat(100));
+		System.out.println(strName + "님 거래 리스트");
+		System.out.println("=".repeat(100));
+		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
+		System.out.println("-".repeat(100));
+		for (IolistDto dto : ioList) {
+			System.out.printf("%s\t", dto.ioDate);
+			System.out.printf("%s\t", dto.ioTime);
+			System.out.printf("%s\t", dto.ioBuid);
+			System.out.printf("%s\t", buyerList.);
+			System.out.printf("%s\t", byDto.buTel);
+			System.out.printf("%s\t", dto.ioPCode);
+			System.out.printf("%s\t", pdDto.pName);
+			System.out.printf("%s\t", dto.ioPrice);
+			System.out.printf("%s\t", dto.ioQuan);
+			System.out.println(ioDto.ioPrice * ioDto.ioQuan);
+		}
+	}
+
+	public void printByDateList() {
+		ioList = ioSer.selectAll();
+		System.out.println("시작날짜 입력 >> ");
+		String strSDate = scan.nextLine();
+		System.out.println("마지막날짜 입력 >> ");
+		String strEDate = scan.nextLine();
+		IolistDto ioDto = ioSer.findByDate(strSDate, strEDate);
+		System.out.println("=".repeat(100));
+		System.out.println(strSDate + " - " + strEDate + " 거래 리스트");
+		System.out.println("=".repeat(100));
+		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
+		System.out.println("-".repeat(100));
+		for (IolistDto dto : ioList) {
+			System.out.printf("%s\t", dto.ioDate);
+			System.out.printf("%s\t", dto.ioTime);
+			System.out.printf("%s\t", dto.ioBuid);
+			BuyerDto byDto = bySer.findById(ioDto.ioBuid);
+			System.out.printf("%s\t", byDto.buName);
+			System.out.printf("%s\t", byDto.buTel);
+			System.out.printf("%s\t", dto.ioPCode);
+			ProductDto pdDto = pdSer.findByCode(ioDto.ioPCode);
+			System.out.printf("%s\t", pdDto.pName);
+			System.out.printf("%s\t", dto.ioPrice);
+			System.out.printf("%s\t", dto.ioQuan);
+			System.out.println(ioDto.ioPrice * dto.ioQuan);
+		}
+	}
+
+	public void printByPNameList() {
+		ioList = ioSer.selectAll();
+		System.out.print("상품이름 입력 >> ");
+		String strPName = scan.nextLine();
+		ProductDto pdDto = pdSer.findByName(strPName);
+		IolistDto ioDto = ioSer.findByCode(pdDto.pCode);
+		System.out.println("=".repeat(100));
+		System.out.println(strPName + " 물품 거래 리스트");
+		System.out.println("=".repeat(100));
+
+		for (IolistDto dto : ioList) {
+			System.out.printf("%s\t", dto.ioDate);
+			System.out.printf("%s\t", dto.ioTime);
+			System.out.printf("%s\t", dto.ioBuid);
+			BuyerDto byDto = bySer.findById(ioDto.ioBuid);
+			System.out.printf("%s\t", byDto.buName);
+			System.out.printf("%s\t", byDto.buTel);
+			System.out.printf("%s\t", dto.ioPCode);
+			System.out.printf("%s\t", pdDto.pName);
+			System.out.printf("%s\t", dto.ioPrice);
+			System.out.printf("%s\t", dto.ioQuan);
+			System.out.println(ioDto.ioPrice * dto.ioQuan);
+		}
+	}
+
+	public void printByNameAndDate() {
+		ioList = ioSer.selectAll();
+		System.out.println("고객ID 입력 >> ");
+		String strID = scan.nextLine();
+		System.out.println("날짜 입력 >> ");
+		String strDate = scan.nextLine();
+		IolistDto ioDto = ioSer.findByIdAndDate(strID, strDate);
+		BuyerDto byDto = bySer.findById(ioDto.ioBuid);
+		System.out.println("=".repeat(100));
+		System.out.println(byDto.buName + "님" + ioDto.ioDate + "날짜 구매 리스트");
+		System.out.println("=".repeat(100));
+		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
+		System.out.println("-".repeat(100));
+		for (IolistDto dto : ioList) {
+			System.out.printf("%s\t", dto.ioDate);
+			System.out.printf("%s\t", dto.ioTime);
+			System.out.printf("%s\t", dto.ioBuid);
+			System.out.printf("%s\t", byDto.buName);
+			System.out.printf("%s\t", byDto.buTel);
+			System.out.printf("%s\t", ioDto.ioPCode);
+			ProductDto pdDto = pdSer.findByCode(ioDto.ioPCode);
+			System.out.printf("%s\t", pdDto.pName);
+			System.out.printf("%s\t", dto.ioPrice);
+			System.out.printf("%s\t", dto.ioQuan);
+			System.out.println(dto.ioPrice * dto.ioQuan);
+		}
 
 	}
 	
-
+	
+	
+	
 	public void insertIoList() {
 
 		System.out.println("=".repeat(100));
@@ -152,42 +254,42 @@ public class ShoppingService {
 
 		System.out.print("상품코드 >>>>>>");
 		strPCode = scan.nextLine();
+		while (true) {
+			if (strPCode == productDto.pCode) {
 
-		if (strPCode == productDto.pCode) {
+				System.out.println(productDto.toString());
+				System.out.printf("상품코드 : %s\n", productDto.pCode);
 
-			System.out.println(productDto.toString());
-			System.out.printf("상품코드 : %s\n", productDto.pCode);
+				System.out.printf("상품명(%s)\n", productDto.pName);
+				String strPName = scan.nextLine();
+				if (!strPName.equals(""))
+					productDto.pName = strPName;
 
-			System.out.printf("상품명(%s)\n", productDto.pName);
-			String strPName = scan.nextLine();
-			if (!strPName.equals(""))
-				productDto.pName = strPName;
+				System.out.printf("품목(%s)\n", productDto.pItem);
+				String strPItem = scan.nextLine();
+				if (!strPItem.equals(""))
+					productDto.pItem = strPItem;
 
-			System.out.printf("품목(%s)\n", productDto.pItem);
-			String strPItem = scan.nextLine();
-			if (!strPItem.equals(""))
-				productDto.pItem = strPItem;
+				System.out.printf("매입단가(%s)\n", productDto.pIPrice);
+				String strPIPrice = scan.nextLine();
+				if (!strPName.equals(""))
+					productDto.pIPrice = Integer.valueOf(strPIPrice);
 
-			System.out.printf("매입단가(%s)\n", productDto.pIPrice);
-			String strPIPrice = scan.nextLine();
-			if (!strPName.equals(""))
-				productDto.pIPrice = Integer.valueOf(strPIPrice);
+				System.out.printf("매출단가(%s)\n", productDto.pOPrice);
+				String strPOPrice = scan.nextLine();
+				if (!strPOPrice.equals(""))
+					productDto.pOPrice = Integer.valueOf(strPOPrice);
 
-			System.out.printf("매출단가(%s)\n", productDto.pOPrice);
-			String strPOPrice = scan.nextLine();
-			if (!strPOPrice.equals(""))
-				productDto.pOPrice = Integer.valueOf(strPOPrice);
-
-			int result = productService.update(productDto);
-			if (result > 0)
-				System.out.println("변경 성공");
-			else
-				System.out.println("변경실패");
-
+				int result = productService.update(productDto);
+				if (result > 0)
+					System.out.println("변경 성공");
+				else
+					System.out.println("변경실패");
+			}
+			break;
 		}
 
 		System.out.print("상품명 >>>>>>");
-
 		String strPName = scan.nextLine();
 
 		System.out.print("품목 >>>>>>");
@@ -279,7 +381,7 @@ public class ShoppingService {
 
 	public String maxId() {
 
-		String strMaxId = buyerService.maxId(null);
+		String strMaxId = buyerService.maxId();
 		int maxId = 0;
 		if (strMaxId == null) {
 			maxId = 0;
@@ -287,7 +389,7 @@ public class ShoppingService {
 			maxId = Integer.valueOf(strMaxId) + 1;
 		}
 		strMaxId = String.format("%010d", maxId);
-		
+
 		return strMaxId;
 	}
 }

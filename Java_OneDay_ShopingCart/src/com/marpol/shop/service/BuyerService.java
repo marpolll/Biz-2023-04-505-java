@@ -9,8 +9,13 @@ public interface BuyerService {
 	public List<BuyerDto> selectAll();
 	
 	public int insert(BuyerDto dto);
+
+	public List<BuyerDto> findById(String id);
 	
-	public String maxId(String date);
-	
+	public List<BuyerDto> findByName(String name);
+
+	public int update(BuyerDto dto);
+
+	public String maxId();
 	
 }

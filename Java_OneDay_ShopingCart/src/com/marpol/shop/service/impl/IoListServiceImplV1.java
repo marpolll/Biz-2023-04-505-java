@@ -19,7 +19,7 @@ public class IoListServiceImplV1 implements IoListService {
 	public IoListServiceImplV1() {
 		dbConn = DBConnection.getDBConn();
 	}
-	
+
 	protected IoListDto result2Dto(ResultSet result) {
 		try {
 			IoListDto ioListDto = new IoListDto();
@@ -30,7 +30,7 @@ public class IoListServiceImplV1 implements IoListService {
 			ioListDto.ioPCode = result.getString(DBContract.IOLIST.IOPCODE);
 			ioListDto.ioQuan = result.getInt(DBContract.IOLIST.IOQUAN);
 			ioListDto.ioPrice = result.getInt(DBContract.IOLIST.IOPRICE);
-			
+
 			return ioListDto;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -38,21 +38,18 @@ public class IoListServiceImplV1 implements IoListService {
 		}
 		return null;
 	}
-	
 
 	public List<IoListDto> selecAll() {
-		
-		
+
 		List<IoListDto> ioList = new ArrayList<>();
-		
-		String sql = " SELECT iodate, iotime, buid, buname, butel, pcode, pname, poprice, ioquan " 
-		+ " FROM tbl_iolist , tbl_buyer , tbl_product "
-		+ " WHERE iobuid = buid " ;
+
+		String sql = " SELECT ioseq, iodate, iotime, iobuid, iopcode, ioquan, ioprice " + " FROM tbl_iolist "
+				+ " ORDER BY ioseq ";
 
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
 			ResultSet result = pStr.executeQuery();
-			while(result.next()) {
+			while (result.next()) {
 				IoListDto ioListDto = result2Dto(result);
 				ioList.add(ioListDto);
 			}
@@ -61,46 +58,43 @@ public class IoListServiceImplV1 implements IoListService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
-
 	public int insert(IoListDto dto) {
-		
+
 		String sql = " INSERT INTO tbl_iolist(ioseq, iodate, iotime, iobuid, iopcode, ioquan, ioprice) "
 				+ " VALUES(seq_buyer.NEXTVAL,?,?,?,?,?,?) ";
 
-				try {
-					PreparedStatement pStr = dbConn.prepareStatement(sql);
-					pStr.setString(1, dto.ioDate);
-					pStr.setString(2, dto.ioTime);
-					pStr.setString(3, dto.ioBuId);
-					pStr.setString(4, dto.ioPCode);
-					pStr.setInt(5, dto.ioQuan);
-					pStr.setInt(6, dto.ioPrice);
-					int result = pStr.executeUpdate();
-					return result;
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+		try {
+			PreparedStatement pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, dto.ioDate);
+			pStr.setString(2, dto.ioTime);
+			pStr.setString(3, dto.ioBuId);
+			pStr.setString(4, dto.ioPCode);
+			pStr.setInt(5, dto.ioQuan);
+			pStr.setInt(6, dto.ioPrice);
+			int result = pStr.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	public List<IoListDto> findByBuId(String ioBuId) {
-		
+
 		List<IoListDto> ioList = new ArrayList<>();
-		
-		String sql = 
-				" SELECT ioseq, iodate, iotime, iobuid, iopcode, ioquan, ioprice "
-				+ " FROM tbl_iolist "
+
+		String sql = " SELECT ioseq, iodate, iotime, iobuid, iopcode, ioquan, ioprice " + " FROM tbl_iolist "
 				+ " WHERE iobuid = ? ";
-		
+
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
 			pStr.setString(1, ioBuId);
 			ResultSet result = pStr.executeQuery();
-			while(result.next()) {
+			while (result.next()) {
 				IoListDto ioListDto = result2Dto(result);
 				ioList.add(ioListDto);
 			}
@@ -109,34 +103,93 @@ public class IoListServiceImplV1 implements IoListService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
-	public List<IoListDto> findByDateDestance(String sDate, String eDate) {
-		
+	public List<IoListDto> findByDate(String sdate, String edate) {
+
 		List<IoListDto> ioList = new ArrayList<>();
-		
-		String sql = 
-				" SELECT * FROM tbl_iolist "
-				+ " WHERE iodate BETWEEN " 
-				+ "? AND ? "; 
-		
+
+		String sql = " SELECT ioSEQ, ioDate, ioTime, ioBuid, ioPCode, ioQuan, ioPrice " + " FROM tbl_iolist "
+				+ " WHERE ioDate BETWEEN ? AND ? " + " ORDER BY ioDate ";
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
-			pStr.setString(1, sDate);
-			pStr.setString(2, eDate);
+			pStr.setString(1, sdate);
+			pStr.setString(2, edate);
 			ResultSet result = pStr.executeQuery();
-			while(result.next()) {
+			while (result.next()) {
 				IoListDto ioListDto = result2Dto(result);
 				ioList.add(ioListDto);
 			}
 			return ioList;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return null;
+	}
+
+	public List<IoListDto> findByCode(String code) {
+
+		List<IoListDto> ioList = new ArrayList<>();
+
+		String sql = " SELECT ioSEQ, ioDate, ioTime, ioBuid, ioPCode, ioQuan, ioPrice " + " FROM tbl_iolist "
+				+ " WHERE ioCode = ? " + " ORDER BY ioCode ";
+		try {
+			PreparedStatement pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, code);
+			ResultSet result = pStr.executeQuery();
+			while (result.next()) {
+				IoListDto ioListDto = result2Dto(result);
+				ioList.add(ioListDto);
+			}
+			return ioList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<IoListDto> findById(String id) {
+
+		List<IoListDto> ioList = new ArrayList<>();
+
+		String sql = " SELECT ioSEQ, ioDate, ioTime, ioBuid, ioPCode, ioQuan, ioPrice " + " FROM tbl_iolist "
+				+ " WHERE ioBuid = ? " + " ORDER BY ioBuid ";
+		try {
+			PreparedStatement pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, id);
+			ResultSet result = pStr.executeQuery();
+			while (result.next()) {
+				IoListDto ioListDto = result2Dto(result);
+				ioList.add(ioListDto);
+			}
+			return ioList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<IoListDto> findByIdAndDate(String code, String date) {
+
+		List<IoListDto> ioList = new ArrayList<>();
+
+		String sql = " SELECT ioSEQ, ioDate, ioTime, ioBuid, ioPCode, ioQuan, ioPrice " + " FROM tbl_iolist "
+				+ " WHERE ioPCode = ? " + " ioDate = ? " + " ORDER BY ioSEQ ";
+		try {
+			PreparedStatement pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, code);
+			pStr.setString(2, date);
+			ResultSet result = pStr.executeQuery();
+			while (result.next()) {
+				IoListDto ioListDto = result2Dto(result);
+				ioList.add(ioListDto);
+			}
+			return ioList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

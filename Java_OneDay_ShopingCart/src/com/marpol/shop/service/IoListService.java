@@ -13,6 +13,10 @@ public interface IoListService {
 	
 	public List<IoListDto> findByBuId(String ioBuId);
 	
-	public List<IoListDto> findByDateDestance(String sDate, String eDate);
+	public List<IoListDto> findByDate(String sdate, String edate);
+
+	public List<IoListDto> findByCode(String code);
+
+	public List<IoListDto> findByIdAndDate(String code, String date);
 	
 }

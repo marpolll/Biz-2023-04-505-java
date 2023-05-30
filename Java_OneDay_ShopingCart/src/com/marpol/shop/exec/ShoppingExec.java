@@ -50,6 +50,7 @@ public class ShoppingExec {
 			if (intSelect < 1 || intSelect > 7) {
 				System.out.println("업무 선택은 1 ~ 7 까지 중에 선택하세요");
 				continue;
+
 			} else if (intSelect == 1)
 				shoppingService.printProductList();
 			else if (intSelect == 2)
@@ -62,8 +63,29 @@ public class ShoppingExec {
 				shoppingService.insertIoList();
 			else if (intSelect == 6)
 				shoppingService.findByBuyer();
-			else if (intSelect == 7)
+			else if (intSelect == 7) {
 				shoppingService.printIoList();
+				while (true) {
+					System.out.println("1. 기간별 2. 상품별 3. 고객+거래기간");
+					String strSel = scan.nextLine();
+					int intSel = 0;
+					try {
+						intSel = Integer.valueOf(strSel);
+					} catch (Exception e) {
+						System.out.printf("업무 선택을 잘못 하였습니다(%s).", strSel);
+						continue;
+					}
+					if (strSelect.equals("QUIT"))
+						break;
+					else if (intSel == 1)
+						shopSer.printByDateList();
+					else if (intSel == 2)
+						shopSer.printByPNameList();
+					else if (intSel == 3)
+						shopSer.printByNameAndDate();
+				}
+			}
+
 		}
 	}
 }

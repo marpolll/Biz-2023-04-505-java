@@ -113,5 +113,53 @@ public class ProductServiceImplV1 implements ProductService {
 		return 0;
 	}
 
+	public List<ProductDto> findByName(String name) {
+		
+		List<ProductDto> productList = new ArrayList<>();
+		
+		String sql = " SELECT pcode, pname, pitem, piprice, poprice " 
+		+ " FROM tbl_product"
+		+ " WHERE pname LIKE '%' || ? || '%' ";
+		try {
+			PreparedStatement pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, name);
+			ResultSet result = pStr.executeQuery();
+			while (result.next()) {
+				ProductDto productDto = result2Dto(result);
+				productList.add(productDto);
+			}
+			return productList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	
+	
+	public List<ProductDto> findByCode(String code) {
+		
+		List<ProductDto> productList = new ArrayList<>();
+		
+		String sql = " SELECT pcode, pname, pitem, piprice, poprice " 
+		+ " FROM tbl_product " 
+		+ " WHERE pcode = ? ";
+		try {
+			PreparedStatement pStr = dbConn.prepareStatement(sql);
+			pStr.setString(1, code);
+			ResultSet result = pStr.executeQuery();
+			while (result.next()) {
+				ProductDto productDto = result2Dto(result);
+				productList.add(productDto);
+			}
+			return productList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 
 }
