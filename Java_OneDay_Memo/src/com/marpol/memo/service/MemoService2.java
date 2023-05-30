@@ -47,159 +47,6 @@ public class MemoService2 {
 	}
 	
 	
-//	public void insertMemoList() {
-//
-//		// 메모정보 확인
-//		printMemoList();
-//		findWriterInfo();
-//		while (true) {
-//			System.out.println(Line.sLine(100));
-//			System.out.println("입출금 등록");
-//			System.out.println(Line.sLine(100));
-//			System.out.println("계좌 입력 >>  ");
-//			String acNum = scan.nextLine();
-//
-//			// 계좌번호를 사용하여 tbl_acc 테이블에서 데이터 조회
-//			// accDto 에는 acNum 계좌번호에 해당하는 데이터가 모두 담긴 상태
-//			AccDto accDto = accService.findById(acNum);
-//
-//			if (accDto == null) {
-//				System.out.printf("계좌번호를 확인하세요($s)", acNum);
-//				continue;
-//			}
-//			System.out.println("거래구분(1입금, 2출금, -1종료) >>");
-//			String aioDiv = scan.nextLine();
-//			
-//			int intDiv = 0;
-//
-//			try {
-//				intDiv = Integer.valueOf(aioDiv);
-//			} catch (Exception e) {
-//				System.out.printf("선택이 잘못되었다.(%s)", aioDiv);
-//				continue;
-//			}
-//			if (intDiv == -1) {
-//				System.out.println("입출금 업무중단");
-//				break;
-//			}
-//
-//			if (intDiv != 1 && intDiv != 2) {
-//				System.out.println("1,  2 중에서 선택하세요");
-//				continue;
-//			}
-//
-//			String[] divs = { "입금", "출금" };
-//
-//			int intAmt = 0;
-//
-//			while (true) {
-//				String prompt = divs[intDiv - 1];
-//				System.out.printf("%s (QUIT : 종료) >> ", divs[intDiv - 1]);
-//				String amount = scan.nextLine();
-//
-//				if (amount.equals("QUIT")) {
-//					intAmt = -1;
-//					break;
-//				}
-//
-//				try {
-//					intAmt = Integer.valueOf(amount);
-//				} catch (Exception e) {
-//					System.out.printf(" %s 금액은 정수로 입력하세요\n", prompt);
-//					continue;
-//				}
-//
-//				if (aioDiv.equals("2")) {
-//					int balance = accDto.acBalance;
-//					if (balance < intAmt) {
-//						System.out.printf("잔액(%d)가 부족하여 출금할수 없습니다.\n", balance);
-//						continue;
-//					}
-//				}
-//				break;
-//			} // 입출금입력 while end
-//
-//			if (intAmt < 0)
-//				break;
-//
-//			AccListDto ioDto = new AccListDto();
-//
-//			Date date = new Date(System.currentTimeMillis());
-//			SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-//			SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-//
-//			ioDto.aioDate = dateFormat.format(date);
-//			ioDto.aioTime = timeFormat.format(date);
-//
-//			ioDto.aioDiv = aioDiv;
-//			ioDto.acNum = acNum;
-//
-//			if (aioDiv.equals("1")) {
-//				ioDto.aioInput = intAmt;
-//			} else if (aioDiv.equals("2")) {
-//				ioDto.aioOutput = intAmt;
-//				intAmt *= -1; // 아래 + intAmt 하나만 쓰기 위해서
-//			}
-//
-//			accListService.insert(ioDto);
-//
-//			accDto.acBalance = accDto.acBalance + intAmt;
-//			accService.update(accDto);
-//
-//		}
-//
-//	}
-
-
-
-//	public void findByWriter2() {
-//
-//		this.printBuyerList();
-//
-//		System.out.println("조회할 작성자를 입력하세요");
-//		System.out.print("작성자 >> ");
-//		String strWriter = scan.nextLine();
-//
-//		MemoDto memoDto = memoService.findByMWriter(strWriter);
-//
-//		if (buyerDto == null) {
-//			System.out.println("고객ID 가 없습니다");
-//			return;
-//		} else {
-//			System.out.println(Line.sLine(100));
-//			System.out.printf("고객ID :  %s\n", buyerDto.buId);
-//			System.out.printf("이름 :  %s\n", buyerDto.buName);
-//			System.out.printf("전화번호 :  %s\n", buyerDto.buTel);
-//			System.out.printf("주소 :  %s\n", buyerDto.buAddr);
-//			System.out.println(Line.sLine(100));
-//		}
-//
-//		List<AccDto> accList = accService.findByBuId(strBuId);
-//		if (accList.isEmpty()) {
-//			System.out.println("고객의 계좌정보가 없습니다");
-//			return;
-//		} else {
-//			System.out.println(Line.sLine(100));
-//			System.out.println("계좌번호\t구분\t잔액");
-//			System.out.println(Line.sLine(100));
-//			for (AccDto accDto : accList) {
-//				System.out.printf("%s\t", accDto.acNum);
-//
-//				int intDate = 0;
-//				try {
-//					intDate = Integer.valueOf(accDto.acDiv);
-//
-//					System.out.printf("%s\t", DBContract.ACC_DIV[intDate - 1]);
-//
-//				} catch (Exception e) {
-//					System.out.printf("%s\t", "종류불명");
-//				}
-//				System.out.printf("%d\n", accDto.acBalance);
-//			}
-//			System.out.println(Line.sLine(100));
-//		}
-//
-//	}
 
 	
 	public void findByWriter() {
@@ -242,25 +89,6 @@ public class MemoService2 {
 		System.out.println("=".repeat(100));
 		System.out.println("메모 등록");
 		System.out.println("=".repeat(100));
-
-//		int maxNum = 0 ;
-//		String seq = "1000";
-//		for(MemoDto memoDto : memoList) {
-//			
-//			int Mseq = memoDto.mseq;
-//	
-//			seq = seq.substring(0,4);
-//		} 
-//		
-//		
-//		String mseq = String.format("%s-%04d", seq,maxNum +1);
-//		
-//		System.out.println("일련번호 : " + mseq);
-		
-//		System.out.print("일련번호 >>>>>>");
-//		String strmseq = scan.nextLine();
-		
-		int seq = 1000;
 		
 		System.out.print("작성자 >>>>>>");
 		String strmwriter = scan.nextLine();
@@ -274,9 +102,6 @@ public class MemoService2 {
 		MemoDto memoDto = new MemoDto();
 		
 		
-		
-		
-		memoDto.mseq = Integer.valueOf(seq);
 		memoDto.mwriter = strmwriter;
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat today = new SimpleDateFormat("YYYY-MM-dd");

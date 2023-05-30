@@ -111,15 +111,16 @@ public class MemoServiceImplV1 implements MemoService {
 
 	public int insert(MemoDto dto) {
 
-		String sql = " INSERT INTO tbl_memo(m_seq, m_writer, m_date, m_subject, m_content) " + " VALUES(?,?,?,?,?) ";
+		String sql = " INSERT INTO tbl_memo(m_seq, m_writer, m_date, m_subject, m_content) "
+		+ " VALUES(seq_memo.NEXTVAL,?,?,?,?) ";
+		
 
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
-			pStr.setInt(1, dto.mseq);
-			pStr.setString(2, dto.mwriter);
-			pStr.setString(3, dto.mdate);
-			pStr.setString(4, dto.msubject);
-			pStr.setString(5, dto.mcontent);
+			pStr.setString(1, dto.mwriter);
+			pStr.setString(2, dto.mdate);
+			pStr.setString(3, dto.msubject);
+			pStr.setString(4, dto.mcontent);
 
 			// sql 로 전달하는 명령대로 DB 를 변경(insert)하라 라는 의미
 			int result = pStr.executeUpdate();
@@ -132,7 +133,7 @@ public class MemoServiceImplV1 implements MemoService {
 
 	public int update(MemoDto dto) {
 
-		String sql = " UPDATE tbl_memo SET  " + " m_writer = ?, " + " m_date = ?, " + " m_subject = ? "
+		String sql = " UPDATE tbl_memo SET  " + " m_writer = ?, " + " m_date = ?, " + " m_subject = ?, "
 				+ " m_content = ? " + " WHERE m_seq = ? ";
 
 		PreparedStatement pStr;
