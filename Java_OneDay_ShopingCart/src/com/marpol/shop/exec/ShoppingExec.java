@@ -78,11 +78,11 @@ public class ShoppingExec {
 					if (strSelect.equals("QUIT"))
 						break;
 					else if (intSel == 1)
-						shopSer.printByDateList();
+						shoppingService.printByDateList();
 					else if (intSel == 2)
-						shopSer.printByPNameList();
+						shoppingService.printByPNameList();
 					else if (intSel == 3)
-						shopSer.printByNameAndDate();
+						shoppingService.printByNameAndDate();
 				}
 			}
 

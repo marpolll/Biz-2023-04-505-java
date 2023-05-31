@@ -41,14 +41,12 @@ public class ProductServiceImplV1 implements ProductService {
 	}
 	
 	public List<ProductDto> selectAll() {
-		
 		List<ProductDto> productList = new ArrayList<>();
 		String sql = 
 				" SELECT "
 				+ " pcode, pname, pitem, piprice, poprice "
 				+ " FROM tbl_product "
 				+ " ORDER BY pcode ";
-		
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
 			ResultSet result = pStr.executeQuery();
@@ -64,8 +62,6 @@ public class ProductServiceImplV1 implements ProductService {
 
 		return null;
 	}
-
-
 	public int insert(ProductDto dto) {
 		
 		String sql = " INSERT INTO tbl_product(pcode, pname, pitem, piprice, poprice) "
@@ -88,14 +84,12 @@ public class ProductServiceImplV1 implements ProductService {
 	}
 
 	public int update(ProductDto dto) {
-		
 		String sql = " UPDATE tbl_product "
 				+" SET pname = ? ,"
 				+" pitem =  ? ,"
 			    +" piprice = ? ,"
 			    +" poprice = ? ,"
 			    +" WHERE pcode = ? ";
-		
 		try {
 			PreparedStatement pStr = dbConn.prepareStatement(sql);
 			pStr.setString(1, dto.pName);
@@ -112,11 +106,8 @@ public class ProductServiceImplV1 implements ProductService {
 		
 		return 0;
 	}
-
 	public List<ProductDto> findByName(String name) {
-		
 		List<ProductDto> productList = new ArrayList<>();
-		
 		String sql = " SELECT pcode, pname, pitem, piprice, poprice " 
 		+ " FROM tbl_product"
 		+ " WHERE pname LIKE '%' || ? || '%' ";
@@ -132,7 +123,6 @@ public class ProductServiceImplV1 implements ProductService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 

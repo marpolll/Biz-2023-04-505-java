@@ -55,15 +55,17 @@ public class ShoppingService {
 		System.out.println("=".repeat(100));
 		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
 		System.out.println("-".repeat(100));
+		
+		BuyerDto buyerDto = new BuyerDto();
+		ProductDto pdDto = new ProductDto();
+		
 		for (IoListDto ioDto : ioList) {
 			System.out.printf("%s\t", ioDto.ioDate);
 			System.out.printf("%s\t", ioDto.ioTime);
 			System.out.printf("%s\t", ioDto.ioBuId);
-			BuyerDto buyerDto = buyerService.findById(ioDto.ioBuId);
 			System.out.printf("%s\t", buyerDto.buName);
 			System.out.printf("%s\t", buyerDto.buTel);
 			System.out.printf("%s\t", ioDto.ioPCode);
-			ProductDto pdDto = productService.findByCode(ioDto.ioPCode);
 			System.out.printf("%s\t", pdDto.pName);
 			System.out.printf("%s\t", ioDto.ioPrice);
 			System.out.printf("%s\t", ioDto.ioQuan);
@@ -76,111 +78,132 @@ public class ShoppingService {
 		
 		ioList = ioListService.selecAll();
 		
+		BuyerDto buyerDto = new BuyerDto();
+		ProductDto pdDto = new ProductDto();
+		
 		System.out.print("고객이름 입력 >> ");
 		String strName = scan.nextLine();
 		
 		buyerList = buyerService.findByName(strName);
-		IoListDto ioDto = ioListService.findByBuId(byDto.buID);
-		ProductDto pdDto = productService.findByCode(ioDto.ioPCode);
 		
 		System.out.println("=".repeat(100));
 		System.out.println(strName + "님 거래 리스트");
 		System.out.println("=".repeat(100));
 		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
 		System.out.println("-".repeat(100));
-		for (IolistDto dto : ioList) {
-			System.out.printf("%s\t", dto.ioDate);
-			System.out.printf("%s\t", dto.ioTime);
-			System.out.printf("%s\t", dto.ioBuid);
-			System.out.printf("%s\t", buyerList.);
-			System.out.printf("%s\t", byDto.buTel);
-			System.out.printf("%s\t", dto.ioPCode);
+		
+		
+		for (IoListDto ioDto : ioList) {
+			System.out.printf("%s\t", ioDto.ioDate);
+			System.out.printf("%s\t", ioDto.ioTime);
+			System.out.printf("%s\t", ioDto.ioBuId);
+			System.out.printf("%s\t", buyerDto.buName);
+			System.out.printf("%s\t", buyerDto.buTel);
+			System.out.printf("%s\t", ioDto.ioPCode);
 			System.out.printf("%s\t", pdDto.pName);
-			System.out.printf("%s\t", dto.ioPrice);
-			System.out.printf("%s\t", dto.ioQuan);
+			System.out.printf("%s\t", ioDto.ioPrice);
+			System.out.printf("%s\t", ioDto.ioQuan);
 			System.out.println(ioDto.ioPrice * ioDto.ioQuan);
 		}
+		System.out.println("-".repeat(150));
 	}
 
 	public void printByDateList() {
-		ioList = ioSer.selectAll();
+		
+		ioList = ioListService.selecAll();
+		
+		BuyerDto buyerDto = new BuyerDto();
+		ProductDto pdDto = new ProductDto();
+		
 		System.out.println("시작날짜 입력 >> ");
 		String strSDate = scan.nextLine();
+		
 		System.out.println("마지막날짜 입력 >> ");
 		String strEDate = scan.nextLine();
-		IolistDto ioDto = ioSer.findByDate(strSDate, strEDate);
+		
+		
 		System.out.println("=".repeat(100));
 		System.out.println(strSDate + " - " + strEDate + " 거래 리스트");
 		System.out.println("=".repeat(100));
 		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
 		System.out.println("-".repeat(100));
-		for (IolistDto dto : ioList) {
-			System.out.printf("%s\t", dto.ioDate);
-			System.out.printf("%s\t", dto.ioTime);
-			System.out.printf("%s\t", dto.ioBuid);
-			BuyerDto byDto = bySer.findById(ioDto.ioBuid);
-			System.out.printf("%s\t", byDto.buName);
-			System.out.printf("%s\t", byDto.buTel);
-			System.out.printf("%s\t", dto.ioPCode);
-			ProductDto pdDto = pdSer.findByCode(ioDto.ioPCode);
+		
+		for (IoListDto ioDto : ioList) {
+			
+			System.out.printf("%s\t", ioDto.ioDate);
+			System.out.printf("%s\t", ioDto.ioTime);
+			System.out.printf("%s\t", ioDto.ioBuId);
+			System.out.printf("%s\t", buyerDto.buName);
+			System.out.printf("%s\t", buyerDto.buTel);
+			System.out.printf("%s\t", ioDto.ioPCode);
 			System.out.printf("%s\t", pdDto.pName);
-			System.out.printf("%s\t", dto.ioPrice);
-			System.out.printf("%s\t", dto.ioQuan);
-			System.out.println(ioDto.ioPrice * dto.ioQuan);
+			System.out.printf("%s\t", ioDto.ioPrice);
+			System.out.printf("%s\t", ioDto.ioQuan);
+			System.out.println(ioDto.ioPrice * ioDto.ioQuan);
 		}
+		System.out.println("-".repeat(150));
 	}
 
 	public void printByPNameList() {
-		ioList = ioSer.selectAll();
+		
+		ioList = ioListService.selecAll();
 		System.out.print("상품이름 입력 >> ");
 		String strPName = scan.nextLine();
-		ProductDto pdDto = pdSer.findByName(strPName);
-		IolistDto ioDto = ioSer.findByCode(pdDto.pCode);
+		
+		
 		System.out.println("=".repeat(100));
 		System.out.println(strPName + " 물품 거래 리스트");
 		System.out.println("=".repeat(100));
 
-		for (IolistDto dto : ioList) {
-			System.out.printf("%s\t", dto.ioDate);
-			System.out.printf("%s\t", dto.ioTime);
-			System.out.printf("%s\t", dto.ioBuid);
-			BuyerDto byDto = bySer.findById(ioDto.ioBuid);
-			System.out.printf("%s\t", byDto.buName);
-			System.out.printf("%s\t", byDto.buTel);
-			System.out.printf("%s\t", dto.ioPCode);
+		BuyerDto buyerDto = new BuyerDto();
+		ProductDto pdDto = new ProductDto();
+		
+		for (IoListDto ioDto : ioList) {
+			System.out.printf("%s\t", ioDto.ioDate);
+			System.out.printf("%s\t", ioDto.ioTime);
+			System.out.printf("%s\t", ioDto.ioBuId);
+			System.out.printf("%s\t", buyerDto.buName);
+			System.out.printf("%s\t", buyerDto.buTel);
+			System.out.printf("%s\t", ioDto.ioPCode);
 			System.out.printf("%s\t", pdDto.pName);
-			System.out.printf("%s\t", dto.ioPrice);
-			System.out.printf("%s\t", dto.ioQuan);
-			System.out.println(ioDto.ioPrice * dto.ioQuan);
+			System.out.printf("%s\t", ioDto.ioPrice);
+			System.out.printf("%s\t", ioDto.ioQuan);
+			System.out.println(ioDto.ioPrice * ioDto.ioQuan);
 		}
+		System.out.println("-".repeat(150));
 	}
 
 	public void printByNameAndDate() {
-		ioList = ioSer.selectAll();
+		ioList = ioListService.selecAll();
 		System.out.println("고객ID 입력 >> ");
 		String strID = scan.nextLine();
+		
 		System.out.println("날짜 입력 >> ");
 		String strDate = scan.nextLine();
-		IolistDto ioDto = ioSer.findByIdAndDate(strID, strDate);
-		BuyerDto byDto = bySer.findById(ioDto.ioBuid);
+		
+		IoListDto ioListDto = new IoListDto();
+		BuyerDto buyerDto = new BuyerDto();
+		ProductDto pdDto = new ProductDto();
+		
 		System.out.println("=".repeat(100));
-		System.out.println(byDto.buName + "님" + ioDto.ioDate + "날짜 구매 리스트");
+		System.out.println(buyerDto.buName + "님" + ioListDto.ioDate + "날짜 구매 리스트");
 		System.out.println("=".repeat(100));
 		System.out.println("거래일자\t거래시각\t고객ID\t고객이름\t전화번호\t상품코드\t상품명\t판매단가\t수량\t판매합계");
 		System.out.println("-".repeat(100));
-		for (IolistDto dto : ioList) {
-			System.out.printf("%s\t", dto.ioDate);
-			System.out.printf("%s\t", dto.ioTime);
-			System.out.printf("%s\t", dto.ioBuid);
-			System.out.printf("%s\t", byDto.buName);
-			System.out.printf("%s\t", byDto.buTel);
+		
+		for (IoListDto ioDto : ioList) {
+			System.out.printf("%s\t", ioDto.ioDate);
+			System.out.printf("%s\t", ioDto.ioTime);
+			System.out.printf("%s\t", ioDto.ioBuId);
+			System.out.printf("%s\t", buyerDto.buName);
+			System.out.printf("%s\t", buyerDto.buTel);
 			System.out.printf("%s\t", ioDto.ioPCode);
-			ProductDto pdDto = pdSer.findByCode(ioDto.ioPCode);
 			System.out.printf("%s\t", pdDto.pName);
-			System.out.printf("%s\t", dto.ioPrice);
-			System.out.printf("%s\t", dto.ioQuan);
-			System.out.println(dto.ioPrice * dto.ioQuan);
+			System.out.printf("%s\t", ioDto.ioPrice);
+			System.out.printf("%s\t", ioDto.ioQuan);
+			System.out.println(ioDto.ioPrice * ioDto.ioQuan);
 		}
+		System.out.println("-".repeat(150));
 
 	}
 	
