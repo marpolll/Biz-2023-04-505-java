@@ -17,7 +17,7 @@ public interface AccService {
 		/*
 		 * pk 칼럼이 아닌 칼럼으로 SELECT 수행했을때
 		 * 결과는 0 이상이다.
-		 * 만약 SELCT 된 결과가 1개 뿐이라는 확신이 있더라도
+		 * 만약 SELECT 된 결과가 1개 뿐이라는 확신이 있더라도
 		 * 이 데이터는 List type 으로 취급한다.
 		 */
 	public List<AccDto> findByBuId(String acBuId);
